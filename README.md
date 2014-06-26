@@ -1,39 +1,17 @@
-ht-java-tomcat
+Heroku Samples
 ==============
 
-Sample project that use tomcat(webapp-runner) for Heroku training
+Herokuトレーニングのサンプルです。
 
-How to deploy
---------------
-
-### Step1  
-
-Clone app from Github  
+### 実行方法
 
 ```
-$ git clone git@github.com:flect/ht-java-tomcat.git
-$ cd ht-java-tomcat/
+$ mvn package
+$ run
 ```
 
-### Step2  
+### 環境変数
 
-Create Heroku application
-
-```
-$ heroku create
-```
-
-### Step3  
-
-Deploy application
-```
-$ git push heroku master
-```
-
-### Step 4
-
-Visit application
-
-```
-$ heroku open
-```
+|変数名|説明|例|
+|:--|:--|:--|
+|DATABASE_URL|接続するDatabase。<br>ローカルではH2のIn Memory Databaseが使用できます。|jdbc:h2:mem:test;DB_CLOSE_DELAY=-1|
