@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.SQLException;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -23,10 +24,7 @@ public class Database {
 	private static void initialize(Connection con) throws SQLException {
 		try {
 			Statement stmt = con.createStatement();
-			String sql = new String(
-				FileUtils.readStream(Database.class.getClassLoader().getResourceAsStream("herokuSamples/db/initialize.sql")),
-				"utf-8"
-			);
+			String sql = FileUtils.readFileAsString(new File("initialize.sql"), "utf-8");
 			for (String s : sql.split(";")) {
 				stmt.executeUpdate(s);
 			}
