@@ -4,18 +4,157 @@
 	<meta charset="UTF-8">
 <head>
 	<title>Herokuサンプル - {{title}</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+	<link rel="stylesheet" href="css/my-theme.css">
+	<link rel="stylesheet" href="css/main.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h1>Heroku サンプル</h1>
-<div>
-	<a href="/">インデックスに戻る</a>
+<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Flect Herokuサポート</a>
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="#about">About</a></li>
+				<li><a href="#contact">Contact</a></li>
+			</ul>
+		</div><!-- /.nav-collapse -->
+	</div><!-- /.container -->
+</div><!-- /.navbar -->
+<div class="container">
+
+	<div class="row row-offcanvas row-offcanvas-right">
+
+		<div class="col-xs-12 col-sm-9">
+			<p class="pull-right visible-xs">
+				<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+			</p>
+			<div class="jumbotron">
+				<h1>Heroku サポート</h1>
+				<p>Herokuでアプリケーションを開発するための方法とサンプルカタログ</p>
+			</div>
+			<div class="row">
+				<div class="col-6 col-sm-6 col-lg-4">
+					<h2>データベース接続</h2>
+					<p>データベースへ接続するための情報を取得する方法の説明と、実際にHeroku Postgersに接続を行うサンプル </p>
+					<p><a class="btn btn-default" href="#" role="button">View sample &raquo;</a></p>
+				</div><!--/span-->
+				<div class="col-6 col-sm-6 col-lg-4">
+					<h2>メール送信</h2>
+					<p>Add-onの一つSendGridを使ってメールを送信するサンプル </p>
+					<p><a class="btn btn-default" href="#" role="button">View sample &raquo;</a></p>
+				</div><!--/span-->
+				<div class="col-6 col-sm-6 col-lg-4">
+					<h2>ロギング</h2>
+					<p>通常ログと例外ログを出力するサンプルとAdd-onを使ってログを確認する方法. </p>
+					<p><a class="btn btn-default" href="#" role="button">View sample &raquo;</a></p>
+				</div><!--/span-->
+			</div><!--/row-->
+			<div class="row">
+				<div class="col-6 col-sm-6 col-lg-4">
+					<h2>IP制限</h2>
+					<p>特定のIPアドレスでアクセス制限を行うためのサンプル. </p>
+					<p><a class="btn btn-default" href="#" role="button">View sample &raquo;</a></p>
+				</div><!--/span-->
+				<div class="col-6 col-sm-6 col-lg-4">
+					<h2>データバックアップ</h2>
+					<p>Add-onの一つであるPG Backupsを使ったHeroku Postgersデータのバックアップとリストアの方法.</p>
+					<p><a class="btn btn-default" href="#" role="button">View sample &raquo;</a></p>
+				</div><!--/span-->
+				<div class="col-6 col-sm-6 col-lg-4">
+					<h2>全文検索</h2>
+					<p>Herokuで全文検索を行う方法とサンプル 使うAdd-onは検討する</p>
+					<p><a class="btn btn-default" href="#" role="button">View sample &raquo;</a></p>
+				</div><!--/span-->
+			</div><!--/row-->
+			<div class="row">
+				<div class="col-6 col-sm-6 col-lg-4">
+					<h2>画像データ編集</h2>
+					<p>特定のIPアドレスでアクセス制限を行うためのサンプル. </p>
+					<p><a class="btn btn-default" href="#" role="button">View sample &raquo;</a></p>
+				</div><!--/span-->
+				<div class="col-6 col-sm-6 col-lg-4">
+					<h2>Salesforce連携</h2>
+					<p>Add-onの一つであるPG Backupsを使ったHeroku Postgersデータのバックアップとリストアの方法.</p>
+					<p><a class="btn btn-default" href="#" role="button">View sample &raquo;</a></p>
+				</div><!--/span-->
+				<div class="col-6 col-sm-6 col-lg-4">
+					<h2>帳票出力</h2>
+					<p>Herokuで全文検索を行う方法とサンプル 使うAdd-onは検討する</p>
+					<p><a class="btn btn-default" href="#" role="button">View sample &raquo;</a></p>
+				</div><!--/span-->
+			</div><!--/row-->
+			<div class="row">
+				<div class="col-6 col-sm-6 col-lg-4">
+					<h2>非同期処理</h2>
+					<p>特定のIPアドレスでアクセス制限を行うためのサンプル. </p>
+					<p><a class="btn btn-default" href="#" role="button">View sample &raquo;</a></p>
+				</div><!--/span-->
+				<div class="col-6 col-sm-6 col-lg-4">
+					<h2>バッチ処理</h2>
+					<p>Add-onの一つであるPG Backupsを使ったHeroku Postgersデータのバックアップとリストアの方法.</p>
+					<p><a class="btn btn-default" href="#" role="button">View sample &raquo;</a></p>
+				</div><!--/span-->
+				<div class="col-6 col-sm-6 col-lg-4">
+					<h2>セッション管理</h2>
+					<p>Herokuで全文検索を行う方法とサンプル 使うAdd-onは検討する</p>
+					<p><a class="btn btn-default" href="#" role="button">View sample &raquo;</a></p>
+				</div><!--/span-->
+			</div><!--/row-->
+			<div class="row">
+				<div class="col-6 col-sm-6 col-lg-4">
+					<h2>認証</h2>
+					<p>特定のIPアドレスでアクセス制限を行うためのサンプル. </p>
+					<p><a class="btn btn-default" href="#" role="button">View sample &raquo;</a></p>
+				</div><!--/span-->
+				<div class="col-6 col-sm-6 col-lg-4">
+					<h2>ファイルアップロード</h2>
+					<p>Add-onの一つであるPG Backupsを使ったHeroku Postgersデータのバックアップとリストアの方法.</p>
+					<p><a class="btn btn-default" href="#" role="button">View sample &raquo;</a></p>
+				</div><!--/span-->
+			</div><!--/row-->
+		</div><!--/span-->
+
+		<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+			<div class="list-group">
+				<a href="/db" class="list-group-item">データベース接続</a>
+				<a href="#" class="list-group-item">メール送信</a>
+				<a href="#" class="list-group-item">ロギング</a>
+				<a href="#" class="list-group-item">IP制限</a>
+				<a href="#" class="list-group-item">データバックアップ</a>
+				<a href="#" class="list-group-item">全文検索</a>
+				<a href="#" class="list-group-item">画像データ編集</a>
+				<a href="#" class="list-group-item">Salesforce連携</a>
+				<a href="#" class="list-group-item">帳票出力</a>
+				<a href="#" class="list-group-item">非同期処理</a>
+				<a href="#" class="list-group-item">バッチ処理</a>
+				<a href="#" class="list-group-item">セッション管理</a>
+				<a href="#" class="list-group-item">認証</a>
+				<a href="#" class="list-group-item">ファイルアップロード</a>
+			</div>
+		</div><!--/span-->
+	</div><!--/row-->
+	<hr>
+	<footer>
+		<p>&copy; FLECT CO.,LTD. ALL RIGHTS RESERVED 2014</p>
+	</footer>
 </div>
-<hr>
-<div>
-	<h2>Hello World!</h2>
-	<ul>
-		<li><a href="/db">DBサンプル</a></li>
-	</ul>
-</div>
+
 </body>
 </html>
