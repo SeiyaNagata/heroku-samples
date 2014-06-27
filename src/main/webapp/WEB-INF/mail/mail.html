@@ -1,0 +1,27 @@
+<div>
+	<p>メールを送信するサンプルです。</p>
+</div>
+<form action="/mail" method="POST">
+	<table>
+		<tr>
+			<td>宛先</td><td><input name="to" value="{{to}}"></td>
+		</tr>
+		<tr>
+			<td>CC</td><td><input name="cc" value="{{cc}}"></td>
+		</tr>
+		<tr>
+			<td>タイトル</td><td><input name="subject" value="{{subject}}"></td>
+		</tr>
+		<tr>
+			<td>本文</td><td><textarea cols="40" rows="5" name="body">{{body}}</textarea></td>
+		</tr>
+	</table>
+	<div>
+		<input type="submit" value="Send" class="btn"/>
+	</div>
+</form>
+<div>
+	<p>{{to}}</p>
+	<p>{{cc}}</p>
+	{{message}}
+</div>
