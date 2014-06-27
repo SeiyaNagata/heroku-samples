@@ -1,5 +1,6 @@
 package herokuSamples.util;
 
+import java.io.File;
 import java.io.Writer;
 import java.io.Reader;
 import java.io.InputStream;
@@ -13,7 +14,7 @@ import com.samskivert.mustache.Mustache;
 
 public class TemplateEngine {
 
-	private static final String BASE = "herokuSamples/web/";
+	private static final String BASE = "target/heroku-samples/WEB-INF/";
 
 	private static final TemplateEngine instance = new TemplateEngine();
 	private static final Template baseTemplate;
@@ -24,6 +25,10 @@ public class TemplateEngine {
 		} catch (IOException e) {
 			throw new IllegalStateException(e);
 		}
+	}
+
+	private static File getFile(String filename) {
+		return new File(BASE + filename);
 	}
 
 	private static String getContentType(String filename) {
@@ -51,28 +56,10 @@ public class TemplateEngine {
 
 
 	public Template create(String filename) throws IOException {
-		com.samskivert.mustache.Template t = Mustache.compiler().compile(readTemplate(filename));
+		File file = getFile(filename);
+		String str = FileUtils.readFileAsString(file, "utf-8");
+		com.samskivert.mustache.Template t = Mustache.compiler().compile(str);
 		return new MustacheTemplate(t);
-	}
-
-	private String readTemplate(String filename) throws IOException {
-		InputStream is = TemplateEngine.class.getClassLoader().getResourceAsStream(BASE + filename);
-		try {
-			java.io.BufferedReader reader = new java.io.BufferedReader(new InputStreamReader(is, "utf-8"));
-			try {
-				StringBuilder buf = new StringBuilder();
-				String line = reader.readLine();
-				while (line != null) {
-					buf.append(line).append("\n");
-					line = reader.readLine();
-				}
-				return buf.toString();
-			} finally {
-				reader.close();
-			}
-		} finally {
-			is.close();
-		}
 	}
 
 	public static interface Template {
