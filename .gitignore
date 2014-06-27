@@ -6,4 +6,4 @@ dist
 /.project
 /.settings
 *.sublime-*
-/grunt
+node_modules
