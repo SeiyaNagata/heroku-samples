@@ -1,33 +1,38 @@
 <div>
 	<p>データベースから値を取得して表示するサンプルです。</p>
 </div>
-<form action="/db">
+<div class="sample_">
+	<form action="/db">
+		<div>
+			Hello !
+			<select name="name">
+				<option vaue="Jane" {{#Jane}}selected{{/Jane}}>Jane</option>
+				<option vaue="Taro" {{#Taro}}selected{{/Taro}}>Taro</option>
+				<option vaue="Miro" {{#Miro}}selected{{/Miro}}>Miro</option>
+			</select>
+			<input type="submit" value="Go!"/>
+		</div>
+	</form>
 	<div>
-		Hello ! 
-		<select name="name">
-			<option vaue="Jane" {{#Jane}}selected{{/Jane}}>Jane</option>
-			<option vaue="Taro" {{#Taro}}selected{{/Taro}}>Taro</option>
-			<option vaue="Miro" {{#Miro}}selected{{/Miro}}>Miro</option>
-		</select>
-		<input type="submit" value="Go!"/>
+		{{message}}
 	</div>
-</form>
-<div>
-	{{message}}
 </div>
 <hr>
-<div>
-	<p>データベース(PostgreSQL)への接続情報は環境変数のDATABASE_URLから取得します。</p>
-	<p>このURLのフォーマットは以下の形式です。</p>
-	<pre>
-		postgres://&lt;username>:&lt;password>@&lt;host>/&lt;dbname>
-	</pre>
-	<p>Playframeworkなどこのスキームを直接解釈できるフレームワークもありますが、JDBC形式のURLを使用する場合は自分でURLを組み立てる必要があります。</p>
-</div>
-<div>
-	<h3>関連ソース(ソースの閲覧には権限が必要です。)</h3>
-	<ul>
-		<li><a href="https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/web/db/DatabaseServlet.java">DatabaseServlet.java</a></li>
-		<li><a href="https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/util/Database.java">Database.java</a></li>
-	</ul>
+<div id="markdown_content">
+## サンプルについて
+
+データベース(PostgreSQL)への接続情報は環境変数のDATABASE_URLから取得します。
+
+このURLのフォーマットは以下の形式です。
+
+```
+postgres://&lt;username>:&lt;password>@&lt;host>/&lt;dbname>
+```
+
+Playframeworkなどこのスキームを直接解釈できるフレームワークもありますが、JDBC形式のURLを使用する場合は自分でURLを組み立てる必要があります。
+
+### 関連ソース(ソースの閲覧には権限が必要です。)
+
+- [DatabaseServlet.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/web/db/DatabaseServlet.java)
+- [Database.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/util/Database.java)
 </div>
