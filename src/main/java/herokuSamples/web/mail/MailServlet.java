@@ -24,7 +24,6 @@ public class MailServlet extends HttpServlet {
 		params.put("title", "メール サンプル");
 		params.put("message", "");
 		params.put("to", "");
-		params.put("cc", "");
 		params.put("subject", "");
 		params.put("body", "");
 		return params;
@@ -41,15 +40,13 @@ public class MailServlet extends HttpServlet {
 		Map<String, Object> params = initParams();
 		req.setCharacterEncoding("utf-8");
 		String to = req.getParameter("to");
-		String cc = req.getParameter("cc");
 		String subject = req.getParameter("subject");
 		String body = req.getParameter("body");
 		params.put("to", to);
-		params.put("cc", cc);
 		params.put("subject", subject);
 		params.put("body", body);
 		try {
-			sendMail(to, cc, subject, body);
+			sendMail(to, subject, body);
 			params.put("message", "メールを送信しました。");
 		} catch (Exception e) {
 			params.put("message", "メールを送信できませんでした。: " + e.getMessage());
@@ -57,14 +54,13 @@ public class MailServlet extends HttpServlet {
 		TemplateEngine.merge(res, "mail/mail.html", params);
 	}
 
-	private void sendMail(String to, String cc, String subject, String body) throws IOException, SendGridException {
+	private void sendMail(String to, String subject, String body) throws IOException, SendGridException {
 		String username = System.getenv("SENDGRID_USERNAME");
 		String password = System.getenv("SENDGRID_PASSWORD");
 		SendGridClient client = new SendGridClient(username, password);
 		WebMail mail = new WebMail();
 		mail.setFrom("test@flect.co.jp");
 		mail.setToList(Arrays.asList(to.split(",")));
-		//mail.setCC(cc);
 		mail.setSubject(subject);
 		mail.setText(body);
 		client.mail(mail);
