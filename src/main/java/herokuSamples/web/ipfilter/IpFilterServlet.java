@@ -1,4 +1,4 @@
-package herokuSamples.web.mail;
+package herokuSamples.web.ipfilter;
 
 import java.util.Arrays;
 import java.util.Map;
