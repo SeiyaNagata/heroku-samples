@@ -1,33 +1,57 @@
 <div>
-	<p>ログを出力するサンプルです。</p>
+	<h3>ログを出力するサンプルです。</h3>
 </div>
 <div class="sample" >
 	<form action="/log" method="POST">
-		<div>
+		<div class="form-group">
+			<label for="info">情報ログ</label>
+			<input type="submit" id="info" value="出力"/>
 			<input type="hidden" name="kind" value="info"/>
-			<input type="submit" value="情報ログを出力"/>
 		</div>
 	</form>
 	<form action="/log" method="POST">
-		<div>
+		<div class="form-group">
+			<label for="error">エラーログ</label>
+			<input type="submit" id="error" value="出力"/>
 			<input type="hidden" name="kind" value="error"/>
-			<input type="submit" value="エラーを出力"/>
 		</div>
 	</form>
-	<div>
+	<div class="bg-info">
 		{{message}}
 	</div>
 </div>
 <div id="markdown_content">
 ## サンプルについて
 
-java.util.logging API を使って標準出力にログを出力するサンプルです
-Heroku上で出力されたログはHerokou toolbeltのコマンドで見ることができます
+java.util.logging API を使って標準出力にログを出力するサンプル
+
+情報ログとエラーログの出力ボタンを押すとHerokuにそれぞれのログを出力します
+
+------------------
+### 必要なAdd-on
+####[Papertrail](https://addons.heroku.com/papertrail)  Herokuのアプリケーションで出力されるログを表示する。
+
+------------------
+### 説明
+Heroku上で出力されたログはHerokou logsコマンドまたは、PapertrailのEvents画面で見ることができます
 
 ```
 heroku logs
 ```
 
+------------------
+### エラー時の通知
+
+Papertrailで対象とするキーワードと通知先のメールアドレスを指定する
+
+1. HerokuのWeb管理画面をブラウザで開いて、アプリケーションを選択
+1. ResourcesのPapertrailを選択してPapertrailのダッシュボード画面に移動
+1. Eventsの画面下部で通知を行いたいキーワードを指定してSearchをクリック
+1. Save Searchで検索条件を保存するポップアップが表示されるので名前をつけてSave & Setup Alertをクリック
+1. 通知先の設定画面が表示されるのでEmailsを選択して、通知先のメールアドレスを入力(オプションは適時入力)
+
+
+------------------
 ### 関連ソース(ソースの閲覧には権限が必要です。)
 
 - [LogServlet.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/web/log/LogServlet.java)
