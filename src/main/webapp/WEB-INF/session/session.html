@@ -1,0 +1,26 @@
+<div>
+	<p>Sessionに値を保存するサンプルです。</p>
+</div>
+<div class="sample">
+	<form action="/session" method="POST">
+		<p>セッションに保存する値を入力してください。 <input name="value" value=""></p>
+		<div>
+			<input type="submit" value="Send" class="btn"/>
+		</div>
+	</form>
+	<div>
+		<p>セッションに保存されている値は</p>
+		<p>"{{value}}"</p>
+		<p>です。</p>
+	</div>
+</div>
+<div id="markdown_content">
+## サンプルについて
+
+### 必要なAdd-on
+- [Memcachier](https://addons.heroku.com/memcachier)
+
+### 関連ソース(ソースの閲覧には権限が必要です。)
+
+- [SessionServlet.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/web/session/SessionServlet.java)
+</div>
