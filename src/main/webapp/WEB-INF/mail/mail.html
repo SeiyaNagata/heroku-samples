@@ -2,26 +2,50 @@
 	<p>メールを送信するサンプルです。</p>
 </div>
 <div class="sample">
-<form action="/mail" method="POST">
-	<table>
-		<tr>
-			<td>宛先</td><td><input name="to" value="{{to}}"></td>
-		</tr>
-		<tr>
-			<td>タイトル</td><td><input name="subject" value="{{subject}}"></td>
-		</tr>
-		<tr>
-			<td>本文</td><td><textarea cols="40" rows="5" name="body">{{body}}</textarea></td>
-		</tr>
-	</table>
+	<form action="/mail" method="POST">
+		<table>
+			<tr>
+				<td>宛先</td><td><input name="to" value="{{to}}"></td>
+			</tr>
+			<tr>
+				<td>タイトル</td><td><input name="subject" value="{{subject}}"></td>
+			</tr>
+			<tr>
+				<td>本文</td><td><textarea cols="40" rows="5" name="body">{{body}}</textarea></td>
+			</tr>
+		</table>
+		<div>
+			<input type="submit" value="Send" class="btn"/>
+		</div>
+	</form>
 	<div>
-		<input type="submit" value="Send" class="btn"/>
+		<p>{{to}}</p>
+		{{message}}
 	</div>
-</form>
-<div>
-	<p>{{to}}</p>
-	{{message}}
-</div>
 </div>
 <div id="markdown_content">
+## サンプルについて
+
+Addonの[SendGrid](http://sendgrid.com/)を使用してメールを送信するサンプルです。  
+メール送信はSendGridのWebAPIを[ラッパーライブラリ](https://github.com/shunjikonishi/sendgrid4j)を使用して叩いています。
+データベース(PostgreSQL)への接続情報は環境変数のDATABASE_URLから取得します。
+
+Addonの追加コマンドは以下です。(Starterは無料)
+
+```
+heroku addons:add sendgrid
+```
+
+Addonを追加すると環境変数にSENDGRID_USERNAME, SENDGRID_PASSWORDという二つの変数が設定されるのでそれらの認証情報を用いてSendGridに接続してAPIを実行します。
+
+## 送信ドメイン認証について
+SendGridではAddon追加直後から、Fromにどんなメールアドレスを設定してもメールを送ることが可能です。  
+ただし、その場合メール送信に使用したドメインが真実あなたの所属する組織であるかが保証されません。(test@example.comというメールアドレスからメールが送信されたとしても送信者がexample.comに属しているとは限らない)
+
+この状態ではメールの信頼度は低くなり、SPAMと判定されやすくなるので必ず[送信ドメイン認証](https://sendgrid.kke.co.jp/blog/?p=879)を設定してください。
+
+
+### 関連ソース(ソースの閲覧には権限が必要です。)
+
+- [MailServlet.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/web/mail/MailServlet.java)
 </div>
