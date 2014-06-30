@@ -16,6 +16,10 @@
 </div>
 <div id="markdown_content">
 ## サンプルについて
+WebDynoを複数立てている場合、各HttpリクエストはラウンドロビンでDynoに転送されます。  
+同一ブラウザからの連続するリクエストも複数のDynoに転送されるのでServlet APIのHttpSessionを使用する場合はバックエンドにMemcached(またはRedis)を置いて各DynoのSessionを共有する必要があります。
+
+このサンプルではHerokuの[WebApp Runner](https://devcenter.heroku.com/articles/java-webapp-runner)を使用しているため、Procfileに「--session-store memcache」を追加するだけでHttpSessionをHerokuのMemcachierアドオンに対応させることができます。
 
 ### 必要なAdd-on
 - [Memcachier](https://addons.heroku.com/memcachier)
@@ -23,4 +27,6 @@
 ### 関連ソース(ソースの閲覧には権限が必要です。)
 
 - [SessionServlet.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/web/session/SessionServlet.java)
+- [Procfile](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/Procfile)
+- [MemcacheSessionStore](https://github.com/jsimone/webapp-runner/blob/1d0b0d2df6115e7a6c1b0874d250f4271efd9685/src/main/java/webapp/runner/launch/MemcacheSessionStore.java)
 </div>
