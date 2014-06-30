@@ -1,0 +1,34 @@
+<div>
+	<p>IP制限をかけるサンプルです。</p>
+</div>
+<div class="sample">
+	<form action="/ipfilter">
+		<table class="table">
+			<tr>
+				<td>RemoteAddress</td><td>{{remoteAddress}}</td>
+			</tr>
+			<tr>
+				<td>x-forwarded-for</td><td>{{xForwardedFor}}</td>
+			</tr>
+		</table>
+		<p>接続元IPを以下のアドレスに制限する</p>
+		<input name="allowedIp" value="{{allowedIp}}"/>
+		<div>
+			<input type="submit" value="Go!" class="btn"/>
+		</div>
+	</form>
+</div>
+<div id="markdown_content">
+## サンプルについて
+
+Herokuアプリケーションに来るHttpリクエストはHerokuのrouterを経由するのでTCP/IP接続のRemoteAddressはrouterのアドレスとなります。
+
+接続元のアドレスはHttpヘッダの「x-forwarded-for」に設定されているので、接続元のIPアドレスで接続を制限する場合はこの値をチェックします。
+
+※ 複数のProxyを経由している場合、x-forwarded-forには複数のIPアドレスがカンマ区切りで設定されます。
+
+
+### 関連ソース(ソースの閲覧には権限が必要です。)
+
+- [IpFilterServlet.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/web/ipfilter/IpFilterServlet.java)
+</div>
