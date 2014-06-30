@@ -61,6 +61,18 @@ input[type="color"],
     background-color: #eee;
 }
 
+.sample {
+    border-radius: 10px;
+    padding-right: 60px;
+    padding-left: 60px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    adding: 30px;
+    margin-bottom: 30px;
+    background-color: #b1acca;
+    color: #000000;
+}
+
 .jumbotron {
     background-color: #464368;
     color: #A6A2BD;
