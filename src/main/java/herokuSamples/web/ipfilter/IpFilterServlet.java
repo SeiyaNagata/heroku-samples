@@ -53,7 +53,6 @@ public class IpFilterServlet extends HttpServlet {
 			} else {
 				allowedIp = getClientAddressFromXForwardedFor(xForwardedFor);
 			}
-			allowedIp = "hahaha";
 		} else if (!isAllowedIp(allowedIp, xForwardedFor.length() == 0 ? remoteAddress : xForwardedFor)) {
 			res.sendError(HttpServletResponse.SC_FORBIDDEN, "Forbidden");
 			return;
