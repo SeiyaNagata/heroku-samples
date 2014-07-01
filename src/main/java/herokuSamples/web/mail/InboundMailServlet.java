@@ -60,7 +60,8 @@ public class InboundMailServlet extends HttpServlet {
 				.append("Subject: ").append(mail.getSubject()).append("\n")
 				.append("AttachmentCount: " + attachmentCount).append("\n");
 			for (int i=0; i<attachmentCount; i++) {
-				buf.append("Attachment1: " + mail.getAttachmentName(i)).append("\n");
+				buf.append("Attachment").append(i+1).append(": ")
+					.append(mail.getAttachmentName(i)).append("\n");
 			}
 			String body = mail.getTextBody();
 			buf.append("\n").append(body);

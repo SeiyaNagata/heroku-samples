@@ -78,6 +78,8 @@ public class Cache {
 				return redis.get(key);
 			} catch (Exception e) {
 				e.printStackTrace();
+			} finally {
+				redis.disconnect();
 			}
 			return null;
 		}
@@ -88,6 +90,8 @@ public class Cache {
 				redis.setex(key, expiration, value.toString());
 			} catch (Exception e) {
 				e.printStackTrace();
+			} finally {
+				redis.disconnect();
 			}
 		}
 
@@ -97,6 +101,8 @@ public class Cache {
 				redis.del(key);
 			} catch (Exception e) {
 				e.printStackTrace();
+			} finally {
+				redis.disconnect();
 			}
 		}
 	}
