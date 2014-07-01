@@ -68,12 +68,13 @@ public class Cache {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			return null;
 		}
 
 		public void set(String key, Object value, int expiration) {
 			Jedis redis = new Jedis(this.uri);
 			try {
-				return redis.setex(key, expiration, value.toString());
+				redis.setex(key, expiration, value.toString());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
