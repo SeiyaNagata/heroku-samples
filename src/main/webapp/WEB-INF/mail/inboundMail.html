@@ -2,37 +2,52 @@
 	<p>メールを受信するサンプルです。</p>
 </div>
 <div class="sample">
-	<p>適当なメールをxxx@hogehoge.com宛にを送信してください。</p>
+	<p>適当なメールをtest@test.fullin-fullout.com宛にを送信してください。</p>
 	<p>受信した最新のメールを以下に表示します。(メール送信後は画面をリロードしてください。)</p>
 	<pre>{{mail}}</pre>
 	<form action="/inboundMail">
 		<input type="hidden" name="delete" value="true">
-		<input type="submit" value="削除">
+		<input type="submit" value="削除" class="btn">
 	</form>
 </div>
 <div id="markdown_content">
 ## サンプルについて
+[SendGrid](http://sendgrid.com/)のParse APIを使用してメール受信時に任意の処理を実行します。  
+メール着信時にはその内容がMultiData/Form形式で指定のURLにPOSTされるのでその内容をパースすることで添付ファイルを含むメールの内容を取得することができます。  
+（このサンプルではメールのパースに[Commons FileUpload](http://commons.apache.org/proper/commons-fileupload/index.html)を使用しています。）
 
-Addonの[SendGrid](http://sendgrid.com/)を使用してメールを送信するサンプルです。  
-メール送信はSendGridのWebAPIを[ラッパーライブラリ](https://github.com/shunjikonishi/sendgrid4j)を使用して叩いています。
-データベース(PostgreSQL)への接続情報は環境変数のDATABASE_URLから取得します。
+### Parse APIの設定
+Parse APIを使用するためにはまずDNS側でSendGridで受けるメールのドメイン(サブドメイン)のMXレコードを「mx.sendgrid.net」に設定します。  
+この設定により指定のドメイン宛に送られてきたメールはすべてSendGrid宛に送られるようになります。
 
-Addonの追加コマンドは以下です。(Starterは無料)
+次にSendGridの管理画面から
 
 ```
-heroku addons:add sendgrid
+Developers ＞ Parsing Incoming Emails
 ```
 
-Addonを追加すると環境変数にSENDGRID_USERNAME, SENDGRID_PASSWORDという二つの変数が設定されるのでそれらの認証情報を用いてSendGridに接続してAPIを実行します。
+の画面を表示して
 
-## 送信ドメイン認証について
-SendGridではAddon追加直後から、Fromにどんなメールアドレスを設定してもメールを送ることが可能です。  
-ただし、その場合メール送信に使用したドメインが真実あなたの所属する組織であるかが保証されません。(test@example.comというメールアドレスからメールが送信されたとしても送信者がexample.comに属しているとは限らない)
+- Hostname: DNSでSendGridでメールを受けるように設定したドメイン
+- Url: メール着信時にHTTP POSTを実行するURL
 
-この状態ではメールの信頼度は低くなり、SPAMと判定されやすくなるので必ず[送信ドメイン認証](https://sendgrid.kke.co.jp/blog/?p=879)を設定してください。
+を指定します。  
+このサンプルでは
+
+- Hostname: test.fullin-fullout.com
+- Url: http://flect-heroku-sample.herokuapp.com/inboundMail
+
+を指定しています。
+
+実際にメール着信時にどのような設定を行っているかは関連ソースをご確認ください。
+
+### Parse API使用時の注意事項
+DNSの設定によりSendGridで受けたメールはURL通知が行われるだけでどこにも保存されません。  
+またDNS側の設定を行っているにも関わらずSendGrid側で通知URLを設定していない状態では任意の第3者がそのドメインに対する通知URLを設定することができてしまいます。
+ご利用の際には必ずDNS側の設定とSendGrid側の設定をセットで行うようにしてください。
 
 
 ### 関連ソース(ソースの閲覧には権限が必要です。)
 
-- [MailServlet.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/web/mail/MailServlet.java)
+- [InboundMailServlet.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/web/mail/InboundMailServlet.java)
 </div>
