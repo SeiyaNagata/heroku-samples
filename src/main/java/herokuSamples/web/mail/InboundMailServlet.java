@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 
 import herokuSamples.util.TemplateEngine;
 import herokuSamples.util.FileUtils;
+import herokuSamples.util.Cache;
 
 
 @WebServlet(name="InboundMailServlet", urlPatterns={"/inboundMail"})
@@ -37,12 +38,19 @@ public class InboundMailServlet extends HttpServlet {
 			req.getSession().setAttribute(SESSION_KEY, mailId);
 		}
 		params.put("mailId", mailId);
+
+		String mail = (String)Cache.get("mail");
+		if (mail == null) {
+			mail = "No mail";
+		}
+		params.put("mail", mail);
 		TemplateEngine.merge(res, "mail/inboundMail.html", params);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		String str = inputStreemToString(req.getInputStream(), "utf-8");
+		Cache.set("mail", str, 7200);
 		System.out.println(str);
 	}
 
