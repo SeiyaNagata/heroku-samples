@@ -44,6 +44,11 @@ public class InboundMailServlet extends HttpServlet {
 			mail = "No mail";
 		}
 		params.put("mail", mail);
+
+		Cache.set("temp", "test", 7200);
+		String temp = (String)Cache.get("temp");
+		System.out.println("temp: " + temp);
+
 		TemplateEngine.merge(res, "mail/inboundMail.html", params);
 	}
 

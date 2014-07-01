@@ -32,7 +32,7 @@ public class Cache {
 		impl = c;
 	}
 	public static Object get(String key) {
-		return null;
+		return impl.get(key);
 	}
 
 	public static void set(String key, Object value) {
@@ -40,11 +40,11 @@ public class Cache {
 	}
 
 	public static void set(String key, Object value, int expiration) {
-
+		impl.set(key, value, expiration);
 	}
 
 	public static void remove(String key) {
-
+		impl.remove(key);
 	}
 
 	private interface CacheImpl {
@@ -53,6 +53,17 @@ public class Cache {
 		public void remove(String key);
 	}
 
+	private static Jedis createJedis(URI uri) {
+		String host = uri.getHost();
+		int port = uri.getPort();
+		Jedis redis = new Jedis(host, port);
+		String userInfo = uri.getUserInfo();
+		if (userInfo != null && userInfo.indexOf(":") != -1) {
+			String auth = userInfo.split(":", 2)[1];
+			redis.auth(auth);
+		}
+		return redis;
+	}
 	private static class RedisCache implements CacheImpl {
 
 		private URI uri;
@@ -62,7 +73,7 @@ public class Cache {
 		}
 
 		public Object get(String key) {
-			Jedis redis = new Jedis(this.uri);
+			Jedis redis = createJedis(this.uri);
 			try {
 				return redis.get(key);
 			} catch (Exception e) {
@@ -72,7 +83,7 @@ public class Cache {
 		}
 
 		public void set(String key, Object value, int expiration) {
-			Jedis redis = new Jedis(this.uri);
+			Jedis redis = createJedis(this.uri);
 			try {
 				redis.setex(key, expiration, value.toString());
 			} catch (Exception e) {
@@ -81,7 +92,7 @@ public class Cache {
 		}
 
 		public void remove(String key) {
-			Jedis redis = new Jedis(this.uri);
+			Jedis redis = createJedis(this.uri);
 			try {
 				redis.del(key);
 			} catch (Exception e) {
