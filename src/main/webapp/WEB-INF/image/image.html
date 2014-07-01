@@ -1,0 +1,68 @@
+<div>
+	<h3>画像を編集して表示するサンプルです。</h3>
+</div>
+<div class="sample">
+	<div class="form-group">
+				<input type="hidden" id="url"/>
+				<input type="hidden" id="public_id"/>
+				<input name="file" type="file" id="uploadinput" class="cloudinary-fileupload" data-cloudinary-field="image_upload" data-form-data="" style="display: none;">
+				<input onclick="$('.cloudinary-fileupload').click();" type="button" stype="pull-right" value="ファイル選択ボタン">
+	<hr>
+	<div class="preview text-center">
+		<img class="sample-img" src="http://dummyimage.com/200x200/333/fff.png"
+			 data-width="200" data-height="200" data-crop="fit"/>
+		<img class="sample-img" src="http://dummyimage.com/100x100/333/fff.png"
+			 data-width="100" data-height="100" data-crop="fit"/>
+		<img class="sample-img" src="http://dummyimage.com/200x200/333/fff.png&text=gravity:face redius:max"
+			 data-width="150" data-height="150"
+			 data-crop="thumb" data-gravity="faces" data-radius="max" />
+	</div>
+	</div>
+</div>
+<script type="text/javascript" src="/js/cloudinary/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="/js/cloudinary/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="/js/cloudinary/jquery.fileupload.js"></script>
+<script type="text/javascript" src="/js/cloudinary/jquery.cloudinary.js"></script>
+<script type='text/javascript'>
+	$.cloudinary.config({
+		"cloud_name": "{{cloud_name}}",
+		"api_key": "{{api_key}}",
+		"private_cdn": false,
+		"cdn_subdomain": false
+	});
+	var signature = {'timestamp': '{{timestamp}}',
+		'signature': '{{signature}}',
+		'api_key': '{{api_key}}'};
+	$('#uploadinput').attr('data-form-data', JSON.stringify(signature));
+
+	$(function () {
+		$("#uploadinput").fileupload().bind("cloudinarydone", function (e, data) {
+			$('.sample-img').attr('data-src', data.result.public_id);
+			$(".sample-img").cloudinary();
+			$('#url').val(data.result.url);
+			$('#public_id').val(data.result.url);
+			return true;
+		});
+	});
+</script>
+<div id="markdown_content">
+## サンプルについて
+
+画像ファイルを選択するとCloudinaryに画像がアップロードされ、加工された画像が表示されます。
+
+------------------
+### 必要なAdd-on
+* [Cloudinary](https://addons.heroku.com/cloudinary)
+
+------------------
+### 説明
+画像ファイルを選択するとページ表示時に取得するCloudinaryへのアクセス情報を使ってブラウザから直接Cloudinaryに直接画像をアップロードします
+
+アップロードした画像はCloudinaryに渡すパラメータにより加工された画像として取得されます
+
+------------------
+### 関連ソース(ソースの閲覧には権限が必要です。)
+
+- [ImageServlet.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/web/image/ImageServlet.java)
+- [image.html](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/webapp/WEB-INF/image/image.html)
+</div>
