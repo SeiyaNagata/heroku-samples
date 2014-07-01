@@ -1,0 +1,32 @@
+<div>
+	<p>メールを受信するサンプルです。</p>
+</div>
+<div class="sample">
+	<p>メールのサブジェクトを「{{mailId}}」として xxx@hogehoge.comにメールを送信してください。</p>
+</div>
+<div id="markdown_content">
+## サンプルについて
+
+Addonの[SendGrid](http://sendgrid.com/)を使用してメールを送信するサンプルです。  
+メール送信はSendGridのWebAPIを[ラッパーライブラリ](https://github.com/shunjikonishi/sendgrid4j)を使用して叩いています。
+データベース(PostgreSQL)への接続情報は環境変数のDATABASE_URLから取得します。
+
+Addonの追加コマンドは以下です。(Starterは無料)
+
+```
+heroku addons:add sendgrid
+```
+
+Addonを追加すると環境変数にSENDGRID_USERNAME, SENDGRID_PASSWORDという二つの変数が設定されるのでそれらの認証情報を用いてSendGridに接続してAPIを実行します。
+
+## 送信ドメイン認証について
+SendGridではAddon追加直後から、Fromにどんなメールアドレスを設定してもメールを送ることが可能です。  
+ただし、その場合メール送信に使用したドメインが真実あなたの所属する組織であるかが保証されません。(test@example.comというメールアドレスからメールが送信されたとしても送信者がexample.comに属しているとは限らない)
+
+この状態ではメールの信頼度は低くなり、SPAMと判定されやすくなるので必ず[送信ドメイン認証](https://sendgrid.kke.co.jp/blog/?p=879)を設定してください。
+
+
+### 関連ソース(ソースの閲覧には権限が必要です。)
+
+- [MailServlet.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/web/mail/MailServlet.java)
+</div>
