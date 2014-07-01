@@ -2,8 +2,13 @@
 	<p>メールを受信するサンプルです。</p>
 </div>
 <div class="sample">
-	<p>メールのサブジェクトを「{{mailId}}」として xxx@hogehoge.comにメールを送信してください。</p>
+	<p>適当なメールをxxx@hogehoge.com宛にを送信してください。</p>
+	<p>受信した最新のメールを以下に表示します。(メール送信後は画面をリロードしてください。)</p>
 	<pre>{{mail}}</pre>
+	<form action="/inboundMail">
+		<input type="hidden" name="delete" value="true">
+		<input type="submit" value="削除">
+	</form>
 </div>
 <div id="markdown_content">
 ## サンプルについて
