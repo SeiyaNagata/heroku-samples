@@ -1,0 +1,102 @@
+<div>
+	<h3>ファイルをアップロードするサンプルです。</h3>
+</div>
+<div class="sample">
+	<form role="form" class="form-inline" id="ajaxform">
+		<div class="form-group">
+			<label class="control-label" for="upload_file">アップロードファイル</label>
+			<input class="form-control" type="file" id="upload_file">
+		</div>
+		<button class="btn btn-primary" id="upload_button">Upload to S3</button>
+	</form>
+	<h3>S3にアップロードされたファイルリスト</h3>
+	<div class="list-group">
+		{{#files}}
+		<a class="list-group-item" href="{{url}}">{{key}}</a>
+		{{/files}}
+	</div>
+	<div class="bg-info">
+		{{message}}
+	</div>
+</div>
+<script>
+	function UploadService() {}
+
+	UploadService.prototype.upload = function(file) {
+		this.getSignedUrl(file)
+				.done(function(data) {
+					console.log(decodeURIComponent(data));
+					$.ajax({
+						url: decodeURIComponent(data),
+						headers: {
+							"x-amz-acl": "public-read"
+						},
+						type: 'PUT',
+						processData: false,
+						contentType: false,
+						data: file
+					}).done(function(msg) {
+						console.log("upload finished." + msg);
+						window.location = '/upload';
+					});
+				});
+	}
+
+	UploadService.prototype.getSignedUrl = function(file) {
+		var defer = $.Deferred();
+		$.ajax({
+			url: "/upload/url",
+			type: "GET",
+			data: { "name": file.name, "type": file.type },
+			success: defer.resolve,
+			error: defer.reject
+		});
+		return defer.promise();
+	}
+
+	$(function() {
+		$('#upload_button').click(function() {
+			var file = $('#upload_file')[0].files[0];
+			if (file != null) {
+				var us = new UploadService();
+				us.upload(file);
+			}
+			return false;
+		});
+	});
+</script>
+<div id="markdown_content">
+## サンプルについて
+
+選択されたファイルをブラウザから直接ファイルををAmazon S3にアップロードし
+
+アップロードされたファイルの一覧を表示します
+
+------------------
+### 必要なAdd-on
+なし
+
+------------------
+### 説明
+S3バケットへの接続情報はHerokuの環境変数に設定します。
+
+```
+heroku config:set AWS_S3_BUCKETNAME=S3のバケット名
+heroku config:set AWS_S3_UPLOAD_ACCESSKEY=S3のAccess Key
+heroku config:set AWS_S3_UPLOAD_SECRETKEY=S3のSecret Access Key
+
+```
+
+S3に対してブラウザから直接ファイルをアップロードする仕組みは以下の流れで行います。
+
+1. ボタンが押されると、まずAJAXでherokuアプリケーションから認証済みURLを要求
+1. HerokuアプリケーションはAWS Sdkを使って認証済みURLを取得してクライアントへ返却
+1. 認証済みURLを受け取ったクライアントはAJAXでS3にファイルをPUTする
+
+
+------------------
+### 関連ソース(ソースの閲覧には権限が必要です。)
+
+- [UploadServlet.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/web/upload/UploadServlet.java)
+- [upload.html](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/webapp/WEB-INF/upload/upload.html)
+</div>
