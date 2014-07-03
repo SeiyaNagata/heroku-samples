@@ -45,8 +45,8 @@
 	UploadService.prototype.getSignedUrl = function(file) {
 		var defer = $.Deferred();
 		$.ajax({
-			url: "/upload/url",
-			type: "GET",
+			type: "POST",
+			url: "/upload",
 			data: { "name": file.name, "type": file.type },
 			success: defer.resolve,
 			error: defer.reject

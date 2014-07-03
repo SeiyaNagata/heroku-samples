@@ -21,7 +21,7 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 import herokuSamples.util.TemplateEngine;
 import org.joda.time.DateTime;
 
-@WebServlet(name="UploadServlet", urlPatterns={"/upload/*"})
+@WebServlet(name="UploadServlet", urlPatterns={"/upload"})
 public class UploadServlet extends HttpServlet {
 
 	private static final String BUCKET_NAME = System.getenv("AWS_S3_BUCKETNAME");
@@ -34,32 +34,24 @@ public class UploadServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		String uri = req.getRequestURI();
-
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("title", "Upload サンプル");
 
 		AmazonS3Client s3 = makeS3Client();
 
-		if (uri == null){
+		List<UploadFile> files = getUploadedFiles(s3);
+		params.put("files", files);
+		params.put("message", "");
+		TemplateEngine.merge(res, "upload/upload.html", params);
+	}
 
-		}switch (uri){
-			case "/upload":
-			case "/upload/":
-				List<UploadFile> files = getUploadedFiles(s3);
-				params.put("files", files);
-				params.put("message", "");
-				TemplateEngine.merge(res, "upload/upload.html", params);
-				break;
-			case "/upload/url":
-				String name = req.getParameter("name");
-				String type = req.getParameter("type");
-				String url = generatePresignedRequestUrl(PREFIX + name, type, "PUT");
-				res.getWriter().print(url);
-				break;
-			default:
-				break;
-		}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+
+		String name = req.getParameter("name");
+		String type = req.getParameter("type");
+		String url = generatePresignedRequestUrl(PREFIX + name, type, "PUT");
+		res.getWriter().print(url);
 	}
 
 	private List<UploadFile> getUploadedFiles(AmazonS3Client s3) {
@@ -74,11 +66,6 @@ public class UploadServlet extends HttpServlet {
 			files.add(new UploadFile(summary.getKey(), s3.getResourceUrl(BUCKET_NAME, summary.getKey())));
 		}
 		return files;
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 	}
 
 	public String generatePresignedRequestUrl(String path, String type,  String method) throws UnsupportedEncodingException {
