@@ -17,18 +17,19 @@ import javax.servlet.annotation.WebServlet;
 import herokuSamples.util.Database;
 import herokuSamples.util.TemplateEngine;
 
-@WebServlet(name="BackupServlet", urlPatterns={"/batch"})
+@WebServlet(name="BackupServlet", urlPatterns={"/dbbackup"})
 public class BackupServlet extends HttpServlet {
 
 	private static Map<String, Object> initParams() {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("title", "バッチ処理 サンプル");
+		params.put("title", "DB Backup サンプル");
 		return params;
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		Map<String, Object> params = initParams();
-		TemplateEngine.merge(res, "batch/batch.html", params);
+		TemplateEngine.merge(res, "db/backup.html", params);
 	}
+
 }
