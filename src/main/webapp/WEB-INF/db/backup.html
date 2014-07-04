@@ -35,7 +35,7 @@ a095  2014/06/30 04:23.02 +0000  Finished @ 2014/06/30 04:23.04 +0000  53.9KB  D
 ```
 引数なしのheroku pgbackupsコマンドで現在のバックアップ一覧が表示されます。  
 aNNNは自動バックアップ、bNNNは手動バックアップです。  
-上記は2014年7月1日の実行結果ですが、Dailyのバックアップが1週間分、Weeklyのバックアップが一ヶ月分保持されていることが分かります。
+上記は2014年7月1日の実行結果ですが、Dailyのバックアップが1週間分、Weeklyのバックアップが一ヶ月分、手動バックアップが２世代分保持されていることが分かります。
 
 
 ### 手動でバックアップを取る
@@ -47,7 +47,7 @@ DATABASEを省略した場合はDATABASE_URLが対象になります。
 
 ### バックアップからリストアする
 ```
-pgbackups:restore [<DATABASE> [BACKUP_ID|BACKUP_URL]]
+heroku pgbackups:restore [<DATABASE> [BACKUP_ID|BACKUP_URL]]
 ```
 DATABASEには環境変数のHEROKU_POSTGRESQL_XXXX_URLを指定します。(XXXXの部分にはランダムに色名が設定されます。)
 DATABASEを省略した場合はDATABASE_URLが対象になります。
