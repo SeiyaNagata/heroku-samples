@@ -49,6 +49,7 @@ public class ImageServlet extends HttpServlet {
 		}
 		String timestamp=(new Long(System.currentTimeMillis() / 1000L)).toString();
 		params.put("timestamp", timestamp);
+		params.put("tags", "image-sample");
 		String apiSecret = Cloudinary.asString(options.get("api_secret"), cloudinary.getStringConfig("api_secret"));
 		if (apiSecret == null)
 			throw new IllegalArgumentException("Must supply api_secret");

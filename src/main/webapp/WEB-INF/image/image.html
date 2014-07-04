@@ -32,11 +32,12 @@
 	});
 	var signature = {'timestamp': '{{timestamp}}',
 		'signature': '{{signature}}',
-		'api_key': '{{api_key}}'};
+		'api_key': '{{api_key}}',
+		'tags': '{{tags}}'};
 	$('#uploadinput').attr('data-form-data', JSON.stringify(signature));
 
 	$(function () {
-		$("#uploadinput").fileupload().bind("cloudinarydone", function (e, data) {
+		$("#uploadinput").fileupload(function(data){}).bind("cloudinarydone", function (e, data) {
 			$('.sample-img').attr('data-src', data.result.public_id);
 			$(".sample-img").cloudinary();
 			$('#url').val(data.result.url);
