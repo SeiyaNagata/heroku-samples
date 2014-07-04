@@ -27,9 +27,13 @@ WebコンソールからHeroku Schedulerを開き新規ジョブを追加する�
 
 起動コマンド
 ```
-java -cp target/heroku-samples/WEB-INF/lib/*;target/classes herokuSamples.batch.CleanupBatch
+java -cp ".:target/heroku-samples/WEB-INF/lib/*:target/classes" herokuSamples.batch.CleanupBatch
 ```
 
+起動コマンド(Windowsのローカル環境で実行する場合)
+```
+java -cp target/heroku-samples/WEB-INF/lib/*;target/classes herokuSamples.batch.CleanupBatch
+```
 ------------------
 ### 関連ソース(ソースの閲覧には権限が必要です。)
 
