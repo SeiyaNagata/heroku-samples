@@ -68,6 +68,24 @@ public class FileUtils {
 		writeFile(file, text, "utf-8");
 	}
 	
+	public static void writeFile(File file, InputStream is) throws IOException {
+		try {
+			FileOutputStream os = new FileOutputStream(file);
+			try {
+				byte[] buf = new byte[8192];
+				int n = is.read(buf);
+				while (n != -1) {
+					os.write(buf, 0, n);
+					n = is.read(buf);
+				}
+			} finally {
+				os.close();
+			}
+		} finally {
+			is.close();
+		}
+	}
+	
 	public static boolean contentEquals(File f1, File f2) throws IOException {
 		if (f1.length() != f2.length()) {
 			return false;
