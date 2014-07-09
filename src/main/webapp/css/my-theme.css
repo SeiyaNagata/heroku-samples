@@ -8,7 +8,7 @@ body {
 }
 
 a {
-    color: #0088cc;
+    color: #333333;
 }
 
 p {
@@ -25,7 +25,7 @@ h6 {
 }
 
 .page-header {
-    border-bottom: 1pxpx solid #eeeeee;
+    border-bottom: 1px solid #eeeeee;
 }
 
 hr {
@@ -60,7 +60,10 @@ input[type="color"],
 .list-group-item {
     background-color: #eee;
 }
-
+.main .list-group-item{
+    min-height: 160px;
+    background-color: #e0e0e0;
+}
 .sample {
     border-radius: 10px;
     padding-right: 60px;
@@ -237,20 +240,17 @@ input[type="color"],
     border-right: 1px solid #c6c6c6;
 }
 
-.navbar-list {
+.navbar .container {
     background-color: #c6c6c6;
 }
 
-.navbar-list a{
-    color: #333333;
-}
 .label,
-.badge {
-    padding: 1px 3px 2px;
-    font-size: 9.75px;
-    color: #ffffff;
-    background-color: #999999;
-}
+/*.badge {*/
+    /*padding: 1px 3px 2px;*/
+    /*font-size: 9.75px;*/
+    /*color: #ffffff;*/
+    /*background-color: #999999;*/
+/*}*/
 
 .label-important,
 .badge-important {
