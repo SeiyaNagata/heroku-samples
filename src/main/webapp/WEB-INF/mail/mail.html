@@ -2,6 +2,7 @@
 	<p>メールを送信するサンプルです。</p>
 </div>
 <div class="sample">
+	<p>{{from}}から入力された内容でメールを送信します。</p>
 	<form action="/mail" method="POST">
 		<table>
 			<tr>
@@ -38,12 +39,15 @@ heroku addons:add sendgrid
 
 Addonを追加すると環境変数にSENDGRID_USERNAME, SENDGRID_PASSWORDという二つの変数が設定されるのでそれらの認証情報を用いてSendGridに接続してAPIを実行します。
 
-## 送信ドメイン認証について
-SendGridではAddon追加直後から、Fromにどんなメールアドレスを設定してもメールを送ることが可能です。  
-ただし、その場合メール送信に使用したドメインが真実あなたの所属する組織であるかが保証されません。(test@example.comというメールアドレスからメールが送信されたとしても送信者がexample.comに属しているとは限らない)
+## SPFとDKIMの設定
+メールではFromにどんなメールアドレスでも設定できることから簡単になりすましができます。  
+近年では[SPF](http://ja.wikipedia.org/wiki/Sender_Policy_Framework)や[DKIM](http://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E3%82%AD%E3%83%BC%E3%83%BB%E3%82%A2%E3%82%A4%E3%83%87%E3%83%B3%E3%83%86%E3%82%A3%E3%83%95%E3%82%A1%E3%82%A4%E3%83%89%E3%83%BB%E3%83%A1%E3%83%BC%E3%83%AB)を用いてメールの信頼性を検証するメールクライアントも増えてきています。  
+SendGridでもこれらの設定を行うことで信頼性を向上させることが可能ですので下記ドキュメントを参照して設定を行ってください。
 
-この状態ではメールの信頼度は低くなり、SPAMと判定されやすくなるので必ず[送信ドメイン認証](https://sendgrid.kke.co.jp/blog/?p=879)を設定してください。
+- [独自ドメインを利用するには](https://sendgrid.kke.co.jp/blog/?p=1107)
+- [Whitelabel Wizard](https://sendgrid.com/docs/User_Guide/whitelabel_wizard.html)
 
+※ DKIMの設定にはSilver以上のプランを使用する必要があります。
 
 ### 関連ソース(ソースの閲覧には権限が必要です。)
 
