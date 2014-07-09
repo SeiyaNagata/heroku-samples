@@ -2,7 +2,7 @@
 	<p>メールを受信するサンプルです。</p>
 </div>
 <div class="sample">
-	<p>適当なメールをtest@test.fullin-fullout.com宛にを送信してください。</p>
+	<p>適当なメールをtest@ht.flectdev.com宛にを送信してください。</p>
 	<p>受信した最新のメールを以下に表示します。(メール送信後は画面をリロードしてください。)</p>
 	<pre>{{mail}}</pre>
 	<form action="/inboundMail">
@@ -34,10 +34,11 @@ Developers ＞ Parsing Incoming Emails
 を指定します。  
 このサンプルでは
 
-- Hostname: test.fullin-fullout.com
+- Hostname: ht.flectdev.com
 - Url: http://flect-heroku-sample.herokuapp.com/inboundMail
 
-を指定しています。
+を指定しています。  
+サンプルでは「test@ht.flectdev.com」にメールを送るように指示していますが、実際にはローカルパート部分には何を指定してもメールは届きます。
 
 実際にメール着信時にどのような設定を行っているかは関連ソースをご確認ください。
 
