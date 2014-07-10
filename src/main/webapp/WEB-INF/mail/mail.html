@@ -1,8 +1,8 @@
-<div>
-	<p>メールを送信するサンプルです。</p>
-</div>
+<div id="markdown_content">
+画面で入力された内容でメールを送信するサンプルです。
+
 <div class="sample">
-	<p>{{from}}から入力された内容でメールを送信します。</p>
+	<p>{{from}}からメールを送信します。</p>
 	<form action="/mail" method="POST">
 		<table>
 			<tr>
@@ -24,20 +24,30 @@
 		{{message}}
 	</div>
 </div>
-<div id="markdown_content">
-## サンプルについて
 
-Addonの[SendGrid](http://sendgrid.com/)を使用してメールを送信するサンプルです。  
+## サンプルの説明
+
+受信可能なメールアドレス、タイトル、本文を入力して「Send」ボタンを押すと表示されているメールアドレスからメールが届きます。
+
+## 解説
+サンプルはAddonのSendGridを使用してメールを送信しています。
+
+<div class="bg-warning">
+	<p><span class="glyphicon glyphicon-info-sign"/> このサンプルを実行するには[SendGrid](http://sendgrid.com/)アドオンが必要です</p>
+	Addonの追加コマンドは以下です。(Starterは無料)
+	<p>
+	```
+	heroku addons:add sendgrid
+	```
+	</p>
+	Addonを追加すると環境変数に**SENDGRID_USERNAME**, **SENDGRID_PASSWORD**という二つの変数が設定される
+</div>
+
+## ラッパーライブラリの利用
 メール送信はSendGridのWebAPIを[ラッパーライブラリ](https://github.com/shunjikonishi/sendgrid4j)を使用して叩いています。
 データベース(PostgreSQL)への接続情報は環境変数のDATABASE_URLから取得します。
 
-Addonの追加コマンドは以下です。(Starterは無料)
-
-```
-heroku addons:add sendgrid
-```
-
-Addonを追加すると環境変数にSENDGRID_USERNAME, SENDGRID_PASSWORDという二つの変数が設定されるのでそれらの認証情報を用いてSendGridに接続してAPIを実行します。
+環境変数の**SENDGRID_USERNAME**, **SENDGRID_PASSWORD**の認証情報を用いてSendGridに接続してAPIを実行します。
 
 ## SPFとDKIMの設定
 メールではFromにどんなメールアドレスでも設定できることから簡単になりすましができます。  
