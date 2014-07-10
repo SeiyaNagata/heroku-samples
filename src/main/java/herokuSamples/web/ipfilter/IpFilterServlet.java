@@ -1,27 +1,22 @@
 package herokuSamples.web.ipfilter;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import java.io.IOException;
+import herokuSamples.util.TemplateEngine;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.annotation.WebServlet;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-import herokuSamples.util.TemplateEngine;
-import jp.co.flect.sendgrid.SendGridClient;
-import jp.co.flect.sendgrid.SendGridException;
-import jp.co.flect.sendgrid.model.WebMail;
-
-@WebServlet(name="IpFilterServlet", urlPatterns={"/ipfilter"})
+@WebServlet(name = "IpFilterServlet", urlPatterns = {"/ipfilter"})
 public class IpFilterServlet extends HttpServlet {
 
 	private static Map<String, Object> initParams() {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("title", "IP制限 サンプル");
+		params.put("title", "IP制限");
 		return params;
 	}
 
@@ -64,5 +59,4 @@ public class IpFilterServlet extends HttpServlet {
 		params.put("xForwardedFor", xForwardedFor);
 		TemplateEngine.merge(res, "ipfilter/ipfilter.html", params);
 	}
-
 }

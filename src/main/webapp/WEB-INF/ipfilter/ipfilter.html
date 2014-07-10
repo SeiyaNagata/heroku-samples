@@ -1,6 +1,5 @@
-<div>
-	<p>IP制限をかけるサンプルです。</p>
-</div>
+<div id="markdown_content">
+アプリケーションでアクセスに対してIP制限をかけるサンプルです。
 <div class="sample">
 	<form action="/ipfilter">
 		<table class="table">
@@ -12,21 +11,26 @@
 			</tr>
 		</table>
 		<p>接続元IPを以下のアドレスに制限する</p>
+		<label>許可IPアドレス</label>
 		<input name="allowedIp" value="{{allowedIp}}"/>
-		<div>
-			<input type="submit" value="Go!" class="btn"/>
-		</div>
+		<input type="submit" value="Go!" class="btn"/>
 	</form>
 </div>
-<div id="markdown_content">
-## サンプルについて
 
+## サンプルの説明
+表示される**RemoteAddress**はHerokuのrouterのアドレスを表し、**x-forwarded-for**は接続元のアドレスを表します。
+テキストボックスにアクセスを許可するIPアドレスを入力して「Go!」をクリックします。
+* **x-forwarded-for**のIPアドレスを指定するとアクセスが 許可されるので画面が表示されます。
+* 別のIPアドレスを指定した場合は*アクセスが許可されないため*403 Forbidden**ページが表示されます。
+
+## 解説
 Herokuアプリケーションに来るHttpリクエストはHerokuのrouterを経由するのでTCP/IP接続のRemoteAddressはrouterのアドレスとなります。
 
 接続元のアドレスはHttpヘッダの「x-forwarded-for」に設定されているので、接続元のIPアドレスで接続を制限する場合はこの値をチェックします。
 
-※ 複数のProxyを経由している場合、x-forwarded-forには複数のIPアドレスがカンマ区切りで設定されます。
-
+<div class="bg-warning">
+	<span class="glyphicon glyphicon-info-sign"/> 複数のProxyを経由している場合、x-forwarded-forには複数のIPアドレスがカンマ区切りで設定されます。
+</div>
 
 ### 関連ソース(ソースの閲覧には権限が必要です。)
 
