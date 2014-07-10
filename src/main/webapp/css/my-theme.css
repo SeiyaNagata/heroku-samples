@@ -8,6 +8,9 @@ body {
 }
 
 a {
+    color: #006dcc;
+}
+.navbar a {
     color: #333333;
 }
 
@@ -59,21 +62,6 @@ input[type="color"],
 
 .list-group-item {
     background-color: #eee;
-}
-.main .list-group-item{
-    min-height: 160px;
-    background-color: #e0e0e0;
-}
-.sample {
-    border-radius: 10px;
-    padding-right: 60px;
-    padding-left: 60px;
-    padding-top: 48px;
-    padding-bottom: 48px;
-    adding: 30px;
-    margin-bottom: 30px;
-    background-color: #b1acca;
-    color: #000000;
 }
 
 .jumbotron {
@@ -245,12 +233,15 @@ input[type="color"],
 }
 
 .label,
-/*.badge {*/
-    /*padding: 1px 3px 2px;*/
-    /*font-size: 9.75px;*/
-    /*color: #ffffff;*/
-    /*background-color: #999999;*/
-/*}*/
+.badge {
+    color: #ffffff;
+    background-color: #999999;
+}
+
+.label-addon,
+.badge-addon {
+    background-color: #97a1a6;
+}
 
 .label-important,
 .badge-important {

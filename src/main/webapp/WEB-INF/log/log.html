@@ -1,6 +1,6 @@
-<div>
-	<h3>ログを出力するサンプルです。</h3>
-</div>
+<div id="markdown_content">
+ログを出力するサンプルです。
+
 <div class="sample" >
 	<form action="/log" method="POST">
 		<div class="form-group">
@@ -16,43 +16,60 @@
 			<input type="hidden" name="kind" value="error"/>
 		</div>
 	</form>
-	<div class="bg-info">
+	<div>
 		{{message}}
 	</div>
 </div>
-<div id="markdown_content">
-## サンプルについて
 
-java.util.logging API を使って標準出力にログを出力するサンプル
+## サンプルの説明
+情報ログとエラーログの出力ボタンを押すとHerokuにそれぞれのログを出力します。
+出力されたログはHerokou logsコマンドまたは、PapertrailのEvents画面で見ることができます
 
-情報ログとエラーログの出力ボタンを押すとHerokuにそれぞれのログを出力します
-
-------------------
-### 必要なAdd-on
-####[Papertrail](https://addons.heroku.com/papertrail)  Herokuのアプリケーションで出力されるログを表示する。
-
-------------------
-### 説明
-Heroku上で出力されたログはHerokou logsコマンドまたは、PapertrailのEvents画面で見ることができます
+Heroku logsコマンド
 
 ```
 heroku logs
 ```
 
-------------------
-### エラー時の通知
+Papertrail Events画面
 
-Papertrailで対象とするキーワードと通知先のメールアドレスを指定する
+<img src="/img/logs/papertrail.png" width="100%"/>
 
-1. HerokuのWeb管理画面をブラウザで開いて、アプリケーションを選択
-1. ResourcesのPapertrailを選択してPapertrailのダッシュボード画面に移動
-1. Eventsの画面下部で通知を行いたいキーワードを指定してSearchをクリック
-1. Save Searchで検索条件を保存するポップアップが表示されるので名前をつけてSave & Setup Alertをクリック
-1. 通知先の設定画面が表示されるのでEmailsを選択して、通知先のメールアドレスを入力(オプションは適時入力)
+-----------------------------------------
 
+## 解説
 
-------------------
+サンプルはjava.util.logging API を使って標準出力にログを出力しています。
+<div class="bg-warning">
+	<p><span class="glyphicon glyphicon-info-sign"/> Herokuのログは**1500**行しか保持されていないので何らかのログのアドオンは必須です</p>
+	<p>**Papertrail**の追加コマンドは以下です。(Chokladは無料、プランごとの料金は[プラグインのページ](https://addons.heroku.com/papertrail)を参照)</p>
+```
+heroku addons:add papertrail
+```
+</div>
+
 ### 関連ソース(ソースの閲覧には権限が必要です。)
 
 - [LogServlet.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/web/log/LogServlet.java)
+
+-----------------------------------------
+
+## エラー時の通知
+Papertrailで対象とするキーワードと通知先のメールアドレスを指定するとエラー時にメールで通知を受け取ることができます。
+
+HerokuのWeb管理画面をブラウザで開いて、アプリケーションを選択して、 ResourcesのPapertrailを選択してPapertrailのダッシュボード画面に移動
+
+Eventsの画面下部で通知を行いたいキーワードを指定してSearchをクリック
+
+<img src="/img/logs/papertrail-search.png" width="100%"/>
+
+Save Searchで検索条件を保存するポップアップが表示されるので名前をつけてSave & Setup Alertをクリック
+
+<img src="/img/logs/papertrail-save.png" width="100%"/>
+
+通知先の設定画面が表示されるのでEmailsを選択して、通知先のメールアドレスを入力(オプションは適時入力)
+
+<img src="/img/logs/papertrail-alert.png" width="100%"/>
+
+
 </div>

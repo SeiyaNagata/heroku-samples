@@ -22,7 +22,7 @@ public class BackupServlet extends HttpServlet {
 
 	private static Map<String, Object> initParams() {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("title", "DB Backup サンプル");
+		params.put("title", "データバックアップ");
 		return params;
 	}
 
