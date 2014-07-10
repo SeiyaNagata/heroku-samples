@@ -1,7 +1,10 @@
-<div>
-	<p>データベースから値を取得して表示するサンプルです。</p>
-</div>
+<div id="markdown_content">
+Heroku Postgresに接続してデータベースから値を取得するサンプルです。
+
 <div class="sample">
+	<div>
+		{{message}}
+	</div>
 	<form action="/db">
 		<div>
 			Hello !
@@ -10,18 +13,37 @@
 				<option vaue="Taro" {{#Taro}}selected{{/Taro}}>Taro</option>
 				<option vaue="Miro" {{#Miro}}selected{{/Miro}}>Miro</option>
 			</select>
-			<input type="submit" value="Go!"/>
+			<input class="btn" type="submit" value="Go!"/>
 		</div>
 	</form>
-	<div>
-		{{message}}
-	</div>
 </div>
-<div id="markdown_content">
-## サンプルについて
 
+## サンプルの説明
+
+1. 初期表示時にプルダウンのリスト情報をデータベースから取得して表示時されます。
+1. プルダウンの人の名前を選択して「Go!」ボタンを押す。
+1. 選択され人をキーにして挨拶文字を取得し画面に表示されます。
+
+Postgersに格納されているデータ
+
+|name |   message|
+|-----|----------|
+|Jane | Hello!   |
+|Taro | こんにちは!|
+|Miro | Guten Tag!|
+
+-----------------------------------------
+
+## 解説
+
+アプリケーションからHeroku Postgresに接続するための解説をします。
+
+<p class="bg-warning">
+	<span class="glyphicon glyphicon-info-sign"/> このサンプルを実行するにはHerokuPostgresアドオンが必要です
+</p>
+
+### 接続情報
 データベース(PostgreSQL)への接続情報は環境変数のDATABASE_URLから取得します。
-
 このURLのフォーマットは以下の形式です。
 
 ```
@@ -30,7 +52,7 @@ postgres://<username>:<password>@<host>/<dbname>
 
 Playframeworkなどこのスキームを直接解釈できるフレームワークもありますが、JDBC形式のURLを使用する場合は自分でURLを組み立てる必要があります。
 
-### 関連ソース(ソースの閲覧には権限が必要です。)
+### 関連ソース (ソースの閲覧には権限が必要です。)
 
 - [DatabaseServlet.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/web/db/DatabaseServlet.java)
 - [Database.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/util/Database.java)

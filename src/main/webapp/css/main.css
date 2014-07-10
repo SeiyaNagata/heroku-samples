@@ -6,6 +6,7 @@ html,
 body {
     overflow-x: hidden; /* Prevent scroll on narrow devices */
     font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", Helvetica, Arial, sans-serif;
+    font: 13px/1.231 arial,helvetica,clean,sans-serif;
 }
 body {
     padding-top: 70px;
@@ -57,4 +58,42 @@ footer {
         top: 0;
         width: 50%; /* 6 columns */
     }
+}
+
+.main .list-group-item{
+    min-height: 160px;
+    background-color: #e0e0e0;
+}
+.bg-warning , .bg-info , .bg-error{
+    padding: 15px;
+}
+
+.detail
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: bold;
+    color: #5f5c8b;
+}
+
+.detail th {
+    background-color: #c6ccd1;
+    min-width: 100px;
+}
+.detail td, th { padding: 10px; }
+.detail table, td, th { border: 2px #808080 solid; }
+
+.sample {
+    border-radius: 10px;
+    padding-right: 60px;
+    padding-left: 60px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    adding: 30px;
+    margin-bottom: 30px;
+    background-color: #b1acca;
+    color: #000000;
 }
