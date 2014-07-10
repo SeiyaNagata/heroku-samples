@@ -87,6 +87,11 @@ h6 {
 .detail td, th { padding: 10px; }
 .detail table, td, th { border: 2px #808080 solid; }
 
+.detail pre,code {
+    background-color: #000000;
+    color: #ffffff;
+}
+
 .sample {
     border-radius: 10px;
     padding-right: 60px;
@@ -98,3 +103,4 @@ h6 {
     background-color: #b1acca;
     color: #000000;
 }
+
