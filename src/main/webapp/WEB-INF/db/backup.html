@@ -2,19 +2,31 @@
 	<p>データベースのバックアップに関するからサンプルです。</p>
 </div>
 <div class="sample">
-	<p>サンプルコードはありません。</p>
+	サンプルコードはありません。
 </div>
 <div id="markdown_content">
-## PostgreSQLのバックアップについて
+
+-----------------------------------------
+
+## 解説
 Addonのpgbackupsを使用することで、毎日自動的にバックアップを取得してくれます。
 
-```
-heroku addons:add pgbackups:auto-month
-```
 
-pgbackupsにはPlus, One Week Retention, One Month Retentionの3つのプランがありますがどれも無料なので特に理由がない限りバックアップ保持数の多いOne Month Retentionを使用すると良いです。
+<div class="bg-warning">
+	<p><span class="glyphicon glyphicon-info-sign"/> このサンプルを実行するには[PGBackups](https://addons.heroku.com/pgbackups)アドオンが必要です</p>
+	Addonの追加コマンドは以下です。(無料)
+	<p>
+		```
+		heroku addons:add pgbackups:auto-month
+		```
+	</p>
+	<p> PG Backupsには**Plus, OneWeek Retention, OneMonth Retention**の3つのプランがありますがどれも無料なので特に理由がない限りバックアップ保持数の多い**OneMonth Retention**を使用すると良いです。 </p>
+</div>
+
 
 ### バックアップの一覧を表示する
+引数なしのheroku pgbackupsコマンドで現在のバックアップ一覧が表示されます。
+**aNNN**は自動バックアップ、**bNNN**は手動バックアップです。
 ```
 $ heroku pgbackups
 ID    Backup Time                Status                                Size    Database
@@ -33,35 +45,33 @@ a093  2014/06/28 03:49.24 +0000  Finished @ 2014/06/28 03:49.28 +0000  53.9KB  D
 a094  2014/06/29 03:34.55 +0000  Finished @ 2014/06/29 03:35.02 +0000  53.9KB  DATABASE_URL
 a095  2014/06/30 04:23.02 +0000  Finished @ 2014/06/30 04:23.04 +0000  53.9KB  DATABASE_URL
 ```
-引数なしのheroku pgbackupsコマンドで現在のバックアップ一覧が表示されます。  
-aNNNは自動バックアップ、bNNNは手動バックアップです。  
 上記は2014年7月1日の実行結果ですが、Dailyのバックアップが1週間分、Weeklyのバックアップが一ヶ月分、手動バックアップが２世代分保持されていることが分かります。
 
 
 ### 手動でバックアップを取る
+DATABASEには環境変数の**HEROKU_POSTGRESQL_XXXX_URL**を指定します。(XXXXの部分にはランダムに色名が設定されます。)
+DATABASEを省略した場合は**DATABASE_URL**が対象になります。
 ```
 heroku pgbackups:capture [DATABASE]
 ```
-DATABASEには環境変数のHEROKU_POSTGRESQL_XXXX_URLを指定します。(XXXXの部分にはランダムに色名が設定されます。)
-DATABASEを省略した場合はDATABASE_URLが対象になります。
 
 ### バックアップからリストアする
+DATABASEには環境変数の**HEROKU_POSTGRESQL_XXXX_URL**を指定します。(XXXXの部分にはランダムに色名が設定されます。)
+DATABASEを省略した場合は**DATABASE_URL**が対象になります。
 ```
 heroku pgbackups:restore [<DATABASE> [BACKUP_ID|BACKUP_URL]]
 ```
-DATABASEには環境変数のHEROKU_POSTGRESQL_XXXX_URLを指定します。(XXXXの部分にはランダムに色名が設定されます。)
-DATABASEを省略した場合はDATABASE_URLが対象になります。
 
-BACKUP_ID(またはBACKUP_URL)を省略した場合は最新のバックアップが対象になります。
+**BACKUP_ID**(または**BACKUP_URL**)を省略した場合は最新のバックアップが対象になります。
 
 ### バックアップからダウンロードする
+指定のバックアップをダウンロードするためのURLを表示します。
+URLの有効期間は**10分間**なのでその間にブラウザやcurl等のツールを用いてダウンロードしてください。
 ```
 heroku pgbackups:url [BACKUP_ID]
 ```
-指定のバックアップをダウンロードするためのURLを表示します。  
-URLの有効期間は10分間なのでその間にブラウザやcurl等のツールを用いてダウンロードしてください。
 
-BACKUP_ID(またはBACKUP_URL)を省略した場合は最新のバックアップが対象になります。
+**BACKUP_ID**(または**BACKUP_URL**)を省略した場合は最新のバックアップが対象になります。
 
 ダウンロードしたバックアップファイルはpg_dumpコマンドでローカルのPostgreSQLにインポートすることができます。
 </div>
