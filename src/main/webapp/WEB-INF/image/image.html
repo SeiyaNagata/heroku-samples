@@ -1,6 +1,6 @@
-<div>
-	<h3>画像を編集して表示するサンプルです。</h3>
-</div>
+<div id="markdown_content">
+アップロードした画像を編集して表示するサンプルです。
+
 <div class="sample">
 	<div class="form-group">
 				<input type="hidden" id="url"/>
@@ -13,12 +13,47 @@
 			 data-width="200" data-height="200" data-crop="fit"/>
 		<img class="sample-img" src="http://dummyimage.com/100x100/333/fff.png"
 			 data-width="100" data-height="100" data-crop="fit"/>
-		<img class="sample-img" src="http://dummyimage.com/200x200/333/fff.png&text=gravity:face redius:max"
+		<img class="sample-img" src="http://dummyimage.com/150x150/333/fff.png&text=gravity:face redius:max"
 			 data-width="150" data-height="150"
 			 data-crop="thumb" data-gravity="faces" data-radius="max" />
 	</div>
 	</div>
 </div>
+
+## サンプルの説明
+
+画像ファイルを選択するとCloudinaryに画像がアップロードされ、加工された３種類の画像が表示されます。
+* 200x200
+* 100x100
+* 150x150 円形 顔認識
+
+アップロードされたファイルは１日１回、深夜のバッチ処理で削除されます。
+
+## 解説
+サンプルはAddonのSendGridを使用してメールを送信しています。
+
+<div class="bg-warning">
+	<p><span class="glyphicon glyphicon-info-sign"/> このサンプルを実行するには[Cloudinary](https://addons.heroku.com/cloudinary)アドオンが必要です</p>
+	Addonの追加コマンドは以下です。(Starterは無料)
+	<p>
+		```
+		heroku addons:add cloudinary
+		```
+	</p>
+	Addonを追加すると環境変数に**CLOUDINARY_URL**という環境変数が設定される
+</div>
+
+### ダイレクトアップロード
+画像ファイルを選択するとページ表示時に取得するCloudinaryへのアクセス情報を使ってブラウザから直接Cloudinaryに直接画像をアップロードします
+
+アップロードした画像はCloudinaryに渡すパラメータにより加工された画像として取得されます
+
+### 関連ソース(ソースの閲覧には権限が必要です。)
+
+- [ImageServlet.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/web/image/ImageServlet.java)
+- [image.html](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/webapp/WEB-INF/image/image.html)
+</div>
+
 <script type="text/javascript" src="/js/cloudinary/jquery.ui.widget.js"></script>
 <script type="text/javascript" src="/js/cloudinary/jquery.iframe-transport.js"></script>
 <script type="text/javascript" src="/js/cloudinary/jquery.fileupload.js"></script>
@@ -46,24 +81,3 @@
 		});
 	});
 </script>
-<div id="markdown_content">
-## サンプルについて
-
-画像ファイルを選択するとCloudinaryに画像がアップロードされ、加工された画像が表示されます。
-
-------------------
-### 必要なAdd-on
-* [Cloudinary](https://addons.heroku.com/cloudinary)
-
-------------------
-### 説明
-画像ファイルを選択するとページ表示時に取得するCloudinaryへのアクセス情報を使ってブラウザから直接Cloudinaryに直接画像をアップロードします
-
-アップロードした画像はCloudinaryに渡すパラメータにより加工された画像として取得されます
-
-------------------
-### 関連ソース(ソースの閲覧には権限が必要です。)
-
-- [ImageServlet.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/web/image/ImageServlet.java)
-- [image.html](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/webapp/WEB-INF/image/image.html)
-</div>
