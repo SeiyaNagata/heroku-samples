@@ -100,7 +100,8 @@ h6 {
     padding-bottom: 28px;
     adding: 30px;
     margin-bottom: 30px;
-    background-color: #b1acca;
+    background-color: #c5c0de;
+    box-shadow:0 1px 4px #6a6a6a;
     color: #000000;
 }
 

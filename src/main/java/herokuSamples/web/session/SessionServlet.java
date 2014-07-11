@@ -18,18 +18,17 @@ public class SessionServlet extends HttpServlet {
 
 	private static Map<String, Object> initParams() {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("title", "Session サンプル");
+		params.put("title", "セッション管理");
 		return params;
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		String value = (String)req.getSession().getAttribute("sessionSample");
-		if (value == null) {
-			value = "";
-		}
 		Map<String, Object> params = initParams();
-		params.put("value", value);
+		if (value != null) {
+			params.put("value", value);
+		}
 		TemplateEngine.merge(res, "session/session.html", params);
 	}
 
