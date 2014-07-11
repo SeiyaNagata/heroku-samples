@@ -1,6 +1,6 @@
-<div>
-	<h3>ファイルをアップロードするサンプルです。</h3>
-</div>
+<div id="markdown_content">
+AmazonS3にファイルをアップロードするサンプルです。
+
 <div class="sample">
 	<form role="form" class="form-inline" id="ajaxform">
 		<div class="form-group">
@@ -15,9 +15,50 @@
 		<a class="list-group-item" href="{{url}}">{{key}}</a>
 		{{/files}}
 	</div>
-	<div class="bg-info">
-		{{message}}
+	<div>
+		{{#message}}
+			{{.}}
+		{{/message}}
 	</div>
+</div>
+
+## サンプルの説明
+
+アップロードするファイルを選択し「Upload to S3」を押すと、選択されたファイルをブラウザから直接Amazon S3にアップロードし
+保存されたファイルを一覧で表示します。クリックするとファイルのURLに移動します。
+
+アップロードされたファイルは１日１回、深夜のバッチ処理で削除されます。
+
+-----------------------------------------
+
+## 解説
+アプリケーションサーバから認証済みのURLを発行し、ブラウザから直接S3へファイルをアップロードするサンプルです。
+
+<div class="bg-warning">
+	<p><span class="glyphicon glyphicon-info-sign"/> このサンプルを実行するにはS3のバケットとアクセするための情報が必要です</p>
+</div>
+
+### 環境変数の設定
+S3バケットへの接続情報はHerokuの環境変数に設定します。
+```
+heroku config:set AWS_S3_BUCKETNAME=S3のバケット名
+heroku config:set AWS_S3_UPLOAD_ACCESSKEY=S3のAccess Key
+heroku config:set AWS_S3_UPLOAD_SECRETKEY=S3のSecret Access Key
+```
+
+### ダイレクトアップロード
+S3に対してブラウザから直接ファイルをアップロードする仕組みは以下の流れで行います。
+
+1. ボタンが押されると、まずAJAXでherokuアプリケーションから認証済みURLを要求
+1. HerokuアプリケーションはAWS Sdkを使って認証済みURLを取得してクライアントへ返却
+1. 認証済みURLを受け取ったクライアントはAJAXでS3にファイルをPUTする
+
+
+------------------
+### 関連ソース(ソースの閲覧には権限が必要です。)
+
+- [UploadServlet.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/web/upload/UploadServlet.java)
+- [upload.html](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/webapp/WEB-INF/upload/upload.html)
 </div>
 <script>
 	function UploadService() {}
@@ -65,38 +106,3 @@
 		});
 	});
 </script>
-<div id="markdown_content">
-## サンプルについて
-
-選択されたファイルをブラウザから直接ファイルをAmazon S3にアップロードし
-
-アップロードされたファイルの一覧を表示します
-
-------------------
-### 必要なAdd-on
-なし
-
-------------------
-### 説明
-S3バケットへの接続情報はHerokuの環境変数に設定します。
-
-```
-heroku config:set AWS_S3_BUCKETNAME=S3のバケット名
-heroku config:set AWS_S3_UPLOAD_ACCESSKEY=S3のAccess Key
-heroku config:set AWS_S3_UPLOAD_SECRETKEY=S3のSecret Access Key
-
-```
-
-S3に対してブラウザから直接ファイルをアップロードする仕組みは以下の流れで行います。
-
-1. ボタンが押されると、まずAJAXでherokuアプリケーションから認証済みURLを要求
-1. HerokuアプリケーションはAWS Sdkを使って認証済みURLを取得してクライアントへ返却
-1. 認証済みURLを受け取ったクライアントはAJAXでS3にファイルをPUTする
-
-
-------------------
-### 関連ソース(ソースの閲覧には権限が必要です。)
-
-- [UploadServlet.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/web/upload/UploadServlet.java)
-- [upload.html](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/webapp/WEB-INF/upload/upload.html)
-</div>

@@ -6,7 +6,7 @@ html,
 body {
     overflow-x: hidden; /* Prevent scroll on narrow devices */
     font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", Helvetica, Arial, sans-serif;
-    font: 13px/1.231 arial,helvetica,clean,sans-serif;
+    /*font: 13px/1.231 arial,helvetica,clean,sans-serif;*/
 }
 body {
     padding-top: 70px;
