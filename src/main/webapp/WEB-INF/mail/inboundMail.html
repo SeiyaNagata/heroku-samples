@@ -1,37 +1,54 @@
-<div>
-	<p>メールを受信するサンプルです。</p>
-</div>
+<div id="markdown_content">
+メールを受信するサンプルです。
+
 <div class="sample">
-	<p>適当なメールをtest@ht.flectdev.com宛にを送信してください。</p>
-	<p>受信した最新のメールを以下に表示します。(メール送信後は画面をリロードしてください。)</p>
-	<pre>{{mail}}</pre>
+	受信メール内容
+	{{#mail}}
+	<pre>{{.}}</pre>
+	{{/mail}}
 	<form action="/inboundMail">
 		<input type="hidden" name="delete" value="true">
 		<input type="submit" value="削除" class="btn">
 	</form>
 </div>
-<div id="markdown_content">
-## サンプルについて
-[SendGrid](http://sendgrid.com/)のParse APIを使用してメール受信時に任意の処理を実行します。  
-メール着信時にはその内容がMultiData/Form形式で指定のURLにPOSTされるのでその内容をパースすることで添付ファイルを含むメールの内容を取得することができます。  
+
+## サンプルの説明
+適当なメールをtest@ht.flectdev.com宛にを送信してください。
+
+受信した最新のメールを画面に表示します。(メール送信後は画面をリロードしてください。)
+
+
+-----------------------------------------
+
+## 解説
+SendGridのParse APIを使用してメール受信時に任意の処理を実行します。
+
+<div class="bg-warning">
+	<p><span class="glyphicon glyphicon-info-sign"/> このサンプルを実行するには[SendGrid](http://sendgrid.com/)アドオンが必要です</p>
+	Addonの追加コマンドは以下です。(Starterは無料)
+	<p>
+		```
+		heroku addons:add sendgrid
+		```
+	</p>
+	Addonを追加すると環境変数に**SENDGRID_USERNAME**, **SENDGRID_PASSWORD**という二つの変数が設定される
+</div>
+
+### 仕組み
+メール着信時にはその内容がMultiData/Form形式で指定のURLにPOSTされるのでその内容をパースすることで添付ファイルを含むメールの内容を取得することができます。
 （このサンプルではメールのパースに[Commons FileUpload](http://commons.apache.org/proper/commons-fileupload/index.html)を使用しています。）
 
 ### Parse APIの設定
 Parse APIを使用するためにはまずDNS側でSendGridで受けるメールのドメイン(サブドメイン)のMXレコードを「mx.sendgrid.net」に設定します。  
 この設定により指定のドメイン宛に送られてきたメールはすべてSendGrid宛に送られるようになります。
 
-次にSendGridの管理画面から
-
-```
-Developers ＞ Parsing Incoming Emails
-```
-
-の画面を表示して
-
+次にSendGridの管理画面から Developers ＞ Parsing Incoming Emails の画面を表示して
 - Hostname: DNSでSendGridでメールを受けるように設定したドメイン
 - Url: メール着信時にHTTP POSTを実行するURL
+を指定します。
 
-を指定します。  
+<img src="/img/mail/inboundmail.png" width="100%"/>
+
 このサンプルでは
 
 - Hostname: ht.flectdev.com

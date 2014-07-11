@@ -15,20 +15,11 @@ import com.cloudinary.*;
 @WebServlet(name="ImageServlet", urlPatterns={"/image"})
 public class ImageServlet extends HttpServlet {
 
-
-	static {
-	}
-	private static Map<String, Object> initParams() {
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("title", "画像編集 サンプル");
-		return params;
-	}
-
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		Map<String, Object> params = getCloudinaryInfo();
-		params.put("title", "画像編集 サンプル");
+		params.put("title", "画像データ編集");
 		params.put("message", "");
 		TemplateEngine.merge(res, "image/image.html", params);
 	}

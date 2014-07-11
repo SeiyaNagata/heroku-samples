@@ -35,13 +35,12 @@ public class UploadServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("title", "Upload サンプル");
+		params.put("title", "ファイルアップロード");
 
 		AmazonS3Client s3 = makeS3Client();
 
 		List<UploadFile> files = getUploadedFiles(s3);
 		params.put("files", files);
-		params.put("message", "");
 		TemplateEngine.merge(res, "upload/upload.html", params);
 	}
 
@@ -98,5 +97,4 @@ public class UploadServlet extends HttpServlet {
 			this.url = url;
 		}
 	}
-
 }

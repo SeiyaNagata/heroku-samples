@@ -38,12 +38,19 @@ Postgersに格納されているデータ
 
 アプリケーションからHeroku Postgresに接続するための解説をします。
 
-<p class="bg-warning">
-	<span class="glyphicon glyphicon-info-sign"/> このサンプルを実行するにはHerokuPostgresアドオンが必要です
-</p>
+<div class="bg-warning">
+	<p> <span class="glyphicon glyphicon-info-sign"/> このサンプルを実行するには[HerokuPostgres](https://addons.heroku.com/heroku-postgresql)アドオンが必要です </p>
+	Addonの追加コマンドは以下です。(HobbyDevは無料)
+	<p>
+		```
+		heroku addons:add heroku-postgresql
+		```
+	</p>
+	Addonを追加すると環境変数に**DATABASE_URL**, **HEROKU_POSTGRESQL_COLOR_URL**という二つの変数が設定される
+</div>
 
 ### 接続情報
-データベース(PostgreSQL)への接続情報は環境変数のDATABASE_URLから取得します。
+データベース(PostgreSQL)への接続情報は環境変数の**DATABASE_URL**から取得します。
 このURLのフォーマットは以下の形式です。
 
 ```
