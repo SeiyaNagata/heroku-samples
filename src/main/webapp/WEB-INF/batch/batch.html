@@ -1,29 +1,38 @@
-<div>
-	<p>Heroku Schedulerから定期的に実行されるバッチプログラムのサンプルです。</p>
-</div>
+<div id="markdown_content">
+Heroku Schedulerから定期的に実行されるバッチプログラムのサンプルです。
+
 <div class="sample">
 	<p>サンプルコードはバッチプログラムです。</p>
 </div>
-<div id="markdown_content">
-### バッチ実行について
+
+## サンプルの説明
 １日一回　０時にファイルアップロードで保存されたS3のファイルと、画像編集で保存されたCloudinaryのファイルを削除する。
 
 ------------------
-### 必要なAdd-on
-* [Heroku Scheduler](https://addons.heroku.com/scheduler)
 
-### バッチ実行について
+## 解説
 AddonのHeroku Schedulerを使用することで指定したスケジュールでバッチプログラムが実行されます。
+
+<div class="bg-warning">
+	<p><span class="glyphicon glyphicon-info-sign"/> このサンプルを実行するには[Heroku Scheduler](https://addons.heroku.com/scheduler)アドオンが必要です</p>
+	Addonの追加コマンドは以下です。
+	<p>
+		```
+		heroku addons:add scheduler
+		```
+	</p>
+</div>
 
 ### バッチプログラムの用意
 実行するバッチプログラムはHerokuのshで実行できるものであれば何でも可能
 サンプルではJavaで実行するので、mainメソッドを持ったクラスを用意してHerokuにデプロイする。
 
-
 ### Heroku Schedulerの設定
 プログラムを起動するためのコマンドと間隔を設定する。間隔は24時間毎,１時間毎,10分毎が選択できる
 
 WebコンソールからHeroku Schedulerを開き新規ジョブを追加する。
+
+<img src="/img/batch/scheduler.png" width="100%"/>
 
 起動コマンド
 ```
@@ -34,7 +43,7 @@ java -cp ".:target/heroku-samples/WEB-INF/lib/*:target/classes" herokuSamples.ba
 ```
 java -cp target/heroku-samples/WEB-INF/lib/*;target/classes herokuSamples.batch.CleanupBatch
 ```
-------------------
+
 ### 関連ソース(ソースの閲覧には権限が必要です。)
 
 - [CleanupBatch.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/batch/CleanupBatch.java)
