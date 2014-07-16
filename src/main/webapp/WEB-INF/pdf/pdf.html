@@ -1,0 +1,60 @@
+<div id="markdown_content">
+PDFを生成するサンプルです。
+
+<div class="sample">
+	<p>HTMLからPDFを生成します。</p>
+	<form action="/pdf" method="POST">
+		<table>
+			<tr>
+				<td>URL または HTML</td><td><input name="content" value="{{url}}"></td>
+			</tr>
+		</table>
+		<div>
+			<input type="submit" value="PDF生成" class="btn"/>
+		</div>
+	</form>
+</div>
+
+## サンプルの説明
+
+アクセス可能なURLまたはHTMLを指定するとそれをPDFに変換します。
+
+-----------------------------------------
+
+## 解説
+サンプルはAddonのHyPDFを使用してHTMLをPDFに変換しています。
+
+<div class="bg-warning">
+	<p><span class="glyphicon glyphicon-info-sign"/> このサンプルを実行するには[HyPDF](https://addons.heroku.com/hypdf)アドオンが必要です</p>
+	Addonの追加コマンドは以下です。(Nanoは無料)
+	<p>
+	```
+	heroku addons:add hypdf
+	```
+	</p>
+	Addonを追加すると環境変数に**HYPDF_USER**, **HYPDF_PASSWORD**という二つの変数が設定されます。
+</div>
+
+## 日本語フォントについて
+HyPDFで日本語を出力するためには日本語用のフォントをWebフォントとして組み込む必要があります。  
+[IPAフォント](http://ipafont.ipa.go.jp/)、[Source Han Sans](http://blog.typekit.com/alternate/source-han-sans-jp/)等のフォントを用意してHTML内のスタイルで@font-faceに指定してください。
+
+```
+@font-face {
+    font-family: MyFont;
+    src: url(www.somecdn.com/my_font.ttf);
+}
+body {
+    font-family: MyFont;
+}
+```
+
+## ラッパーライブラリの利用
+このサンプルではHyPDFのWebAPIを[ラッパーライブラリ](https://github.com/shunjikonishi/hypdf4j)を使用して叩いています。
+
+環境変数の**HYPDF_USER**, **HYPDF_PASSWORD**の認証情報を用いてHyPDFに接続してAPIを実行します。
+
+### 関連ソース(ソースの閲覧には権限が必要です。)
+
+- [PdfServlet.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/web/pdf/PdfServlet.java)
+</div>
