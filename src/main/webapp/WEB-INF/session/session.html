@@ -1,28 +1,51 @@
-<div>
-	<p>Sessionに値を保存するサンプルです。</p>
-</div>
+<div id="markdown_content">
+Sessionに値を保存するサンプルです。
+
 <div class="sample">
 	<form action="/session" method="POST">
-		<p>セッションに保存する値を入力してください。 <input name="value" value=""></p>
-		<div>
+		<div class="form-group">
+			<label>セッションに保存する値を入力してください。</label> <input name="value" value="">
 			<input type="submit" value="Send" class="btn"/>
+			<input type="button" value="Reload" class="btn pull-right" onclick="window.location.reload();"/>
 		</div>
 	</form>
 	<div>
-		<p>セッションに保存されている値は</p>
-		<p>"{{value}}"</p>
-		<p>です。</p>
+		{{#value}} セッションに保存されている値は"{{.}}"です。{{/value}}
 	</div>
 </div>
-<div id="markdown_content">
-## サンプルについて
-WebDynoを複数立てている場合、各HttpリクエストはラウンドロビンでDynoに転送されます。  
+
+## サンプルの説明
+
+テキストに文字を入力して「Send」を押すと文字がセッション情報として保存されます。
+セッションに保存された文字は画面上に表示され、セッションが存在しない場合は何も表示されません。
+
+セッション情報として保存された文字は、同一セッションである限りブラウザでページをリロードしても同じ文字が表示されます。
+
+
+-----------------------------------------
+
+## 解説
+サンプルはAddonのSendGridを使用してメールを送信しています。
+
+<div class="bg-warning">
+	<p><span class="glyphicon glyphicon-info-sign"/> このサンプルを実行するには[MemCachier](https://addons.heroku.com/memcachier/)アドオンが必要です</p>
+	Addonの追加コマンドは以下です。(Developerは無料)
+	<p>
+		```
+		heroku addons:add memcachier
+		```
+	</p>
+	Addonを追加すると環境変数に**MEMCACHIER_SERVERS**, **MEMCACHIER_USERNAME**, **MEMCACHIER_PASSWORD**という３つの変数が設定される
+</div>
+
+### Herokuのサーバセッション
+WebDynoを複数立てている場合、各HttpリクエストはラウンドロビンでDynoに転送されます。
 同一ブラウザからの連続するリクエストも複数のDynoに転送されるのでServlet APIのHttpSessionを使用する場合はバックエンドにMemcached(またはRedis)を置いて各DynoのSessionを共有する必要があります。
 
+
+### WebApp Runner
 このサンプルではHerokuの[WebApp Runner](https://devcenter.heroku.com/articles/java-webapp-runner)を使用しているため、Procfileに「--session-store memcache」を追加するだけでHttpSessionをHerokuのMemcachierアドオンに対応させることができます。
 
-### 必要なAdd-on
-- [Memcachier](https://addons.heroku.com/memcachier)
 
 ### 関連ソース(ソースの閲覧には権限が必要です。)
 

@@ -26,7 +26,7 @@ public class DatabaseServlet extends HttpServlet {
 			String name = req.getParameter("name");
 			String message = name == null ? "挨拶する人を選択してください。" : getString(name);
 			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("title", "Database サンプル");
+			params.put("title", "データベース接続");
 			params.put("message", message);
 			if (name != null) {
 				params.put(name, name);

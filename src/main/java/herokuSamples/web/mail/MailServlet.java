@@ -27,7 +27,7 @@ public class MailServlet extends HttpServlet {
 			from = DEFAULT_MAIL_FROM;
 		}
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("title", "メール サンプル");
+		params.put("title", "メール送信");
 		params.put("message", "");
 		params.put("to", "");
 		params.put("subject", "");

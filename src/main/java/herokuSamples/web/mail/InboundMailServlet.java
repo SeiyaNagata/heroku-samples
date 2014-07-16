@@ -27,7 +27,7 @@ public class InboundMailServlet extends HttpServlet {
 
 	private static Map<String, Object> initParams() {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("title", "メール受信 サンプル");
+		params.put("title", "インバウンドメール");
 		return params;
 	}
 

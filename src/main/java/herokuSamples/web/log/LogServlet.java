@@ -22,7 +22,7 @@ public class LogServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("title", "Log サンプル");
+		params.put("title", "ロギング");
 		params.put("message", "");
 		TemplateEngine.merge(res, "log/log.html", params);
 	}

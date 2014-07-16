@@ -30,7 +30,7 @@
 		</script>
 	</head>
 	<body>
-	<div class="navbar navbar-fixed-top navbar-list" role="navigation">
+	<div class="navbar navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -51,10 +51,32 @@
 		</div><!-- /.container -->
 	</div><!-- /.navbar -->
 	<div class="container">
-		<a class="btn btn-default pull-right" href="/">インデックスに戻る</a>
-		<h1>{{title}}</h1>
-		{{{CONTENT}}}
-		<hr>
+		<div class="row row-offcanvas">
+			<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+				<div class="list-group">
+					<a href="/db" class="list-group-item">データベース接続</a>
+					<a href="/mail" class="list-group-item">メール送信</a>
+					<a href="/log" class="list-group-item">ロギング</a>
+					<a href="/ipfilter" class="list-group-item">IP制限</a>
+					<a href="/dbbackup" class="list-group-item">データバックアップ</a>
+					<a href="/session" class="list-group-item">セッション管理</a>
+					<a href="/upload" class="list-group-item">ファイルアップロード</a>
+					<a href="/image" class="list-group-item">画像データ編集</a>
+					<a href="/batch" class="list-group-item">バッチ処理</a>
+					<a href="/inboundMail" class="list-group-item">インバウンドメール</a>
+					<!--<a href="#" class="list-group-item">salesforce連携</a>-->
+					<!--<a href="#" class="list-group-item">帳票出力</a>-->
+					<!--<a href="#" class="list-group-item">非同期処理</a>-->
+					<!--<a href="#" class="list-group-item">全文検索</a>-->
+					<!--<a href="#" class="list-group-item">認証</a>-->
+				</div>
+			</div><!--/span-->
+			<div class="col-xs-12 col-sm-9 detail">
+				<h1>{{title}}</h1>
+				{{{CONTENT}}}
+				<hr>
+			</div><!-- /.nav-collapse -->
+		</div><!-- /.nav-collapse -->
 		<footer>
 			<p>&copy; FLECT CO.,LTD. ALL RIGHTS RESERVED 2014</p>
 		</footer>
