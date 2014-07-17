@@ -17,6 +17,7 @@ import herokuSamples.util.TemplateEngine;
 import jp.co.flect.hypdf.HyPDF;
 import jp.co.flect.hypdf.model.HyPDFOption;
 import jp.co.flect.hypdf.model.PdfResponse;
+import jp.co.flect.hypdf.model.LengthUnit;
 
 @WebServlet(name="PdfServlet", urlPatterns={"/pdf"})
 public class PdfServlet extends HttpServlet {
@@ -64,6 +65,8 @@ public class PdfServlet extends HttpServlet {
 		hypdf.getTransport().setIgnoreHostNameVerification(true);
 		hypdf.setTestMode(true);
 		HyPDFOption.HtmlToPdf option = new HyPDFOption.HtmlToPdf();
+		option.margin_top = LengthUnit.inch(0.25);
+		option.margin_bottom = LengthUnit.inch(0.25);
 		option.footer = new HyPDFOption.Footer();
 		option.footer.center = "&copy; FLECT CO.,LTD. ALL RIGHTS RESERVED 2014";
 		return hypdf.htmlToPdf(content, option);

@@ -1,87 +1,42 @@
+
+
 <!DOCTYPE html>
 <html>
-	<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>PDFサンプル</title>
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-
-	<link rel="stylesheet" href="css/my-theme.css">
-	<link rel="stylesheet" href="css/main.css">
-	<style>
-	@font-face {
-		font-family: 'ipaexm';
-		src: url('//s3-ap-northeast-1.amazonaws.com/flect-excel-report/fonts/ipaexm.ttf');
-	}
-	@font-face {
-		font-family: 'ipaexg';
-		src: url('//s3-ap-northeast-1.amazonaws.com/flect-excel-report/fonts/ipaexg.ttf');
-	}
-	@font-face {
-		font-family: 'hansans';
-		src: url('//s3-ap-northeast-1.amazonaws.com/flect-excel-report/fonts/SourceHanSans-Normal.otf');
-	}
-	body {
-		font-family: hansans;
-		font-size: 14pt;
-	}
-	</style>
-
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	<script>
-		$(document).ready(function () {
-			$('[data-toggle="offcanvas"]').click(function () {
-				$('.row-offcanvas').toggleClass('active')
-			});
-		});
-	</script>
+<head>
+<title>HyPDF-Excel</title>
+<meta charset="utf-8">
+<link rel="stylesheet" media="screen" href="/js/excel2canvas/jquery.excel2canvas.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="/js/flotr2/flotr2.min.js"></script>
+<script src="/js/excel2canvas/jquery.excel2canvas.js"></script>
+<script src="/js/excel2canvas/jquery.excel2chart.flotr2.js"></script>
 </head>
 <body>
-<div class="container main">
-	<h1>PDFサンプル</h1>
-	<h2>リスト</h2>
-	<ul>
-		<li>ゴシック体</li>
-		<li style="font-family:ipaexm;">明朝体</li>
-	</ul>
-	<h2>テーブル</h2>
-	<table class="table">
-		<thead>
-			<tr>
-				<th>名前</th>
-				<th>説明</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Heroku-Postgres</td>
-				<td>PostgreSQLです。</td>
-			</tr>
-			<tr>
-				<td>HyPDF</td>
-				<td>PDFを出力するアドオンです。</td>
-			</tr>
-			<tr>
-				<td>SendGrid</td>
-				<td>メールを送信するアドオンです。</td>
-			</tr>
-		</tbody>
-	</table>
-	<h2>Alert</h2>
-	<div class="alert alert-info">
-		アラート
-	</div>
-	<hr>
-	<footer>
-		<p>&copy; FLECT CO.,LTD. ALL RIGHTS RESERVED 2014</p>
-	</footer>
-</div>
 
+
+<style>
+@font-face {
+	font-family: 'ipaexm';
+	src: url('//s3-ap-northeast-1.amazonaws.com/flect-excel-report/fonts/ipaexm.ttf');
+}
+@font-face {
+	font-family: 'ipaexg';
+	src: url('//s3-ap-northeast-1.amazonaws.com/flect-excel-report/fonts/ipaexg.ttf');
+}
+
+#canvasHolder { position: absolute; left: 0; top: 0;}
+#excelCanvas { position:absolute;left:0;top:0;z-index:0;}
+</style>
+<script>
+$(function() {
+	var data = {"width":769,"height":1072,"lines":[{"p":[0,186,311,186],"kind":2},{"p":[0,282,311,282]},{"p":[0,306,311,306]},{"p":[416,306,590,306]},{"p":[0,330,311,330]},{"p":[416,330,677,330]},{"p":[0,354,311,354]},{"p":[0,409,311,409],"kind":2},{"p":[416,409,677,409]},{"p":[0,437,697,437]},{"p":[0,461,697,461]},{"p":[0,485,697,485]},{"p":[0,509,697,509]},{"p":[0,533,697,533]},{"p":[0,557,697,557]},{"p":[0,581,697,581]},{"p":[0,605,697,605]},{"p":[0,629,697,629]},{"p":[0,653,697,653]},{"p":[0,677,697,677]},{"p":[0,701,697,701]},{"p":[0,725,697,725]},{"p":[0,749,697,749]},{"p":[0,773,697,773]},{"p":[0,797,697,797]},{"p":[0,821,590,821],"kind":6},{"p":[590,821,697,821]},{"p":[503,845,697,845]},{"p":[503,869,697,869]},{"p":[503,893,697,893]},{"p":[0,936,697,936]},{"p":[0,956,697,956],"kind":4},{"p":[0,976,697,976],"kind":4},{"p":[0,996,697,996],"kind":4},{"p":[0,1016,697,1016],"kind":4},{"p":[0,1036,697,1036],"kind":4},{"p":[0,1054,697,1054]},{"p":[0,437,0,821]},{"p":[0,936,0,1054]},{"p":[112,437,112,821]},{"p":[416,330,416,409]},{"p":[416,437,416,821]},{"p":[503,330,503,409]},{"p":[503,437,503,893]},{"p":[590,330,590,409]},{"p":[590,437,590,893]},{"p":[677,330,677,409]},{"p":[697,437,697,893]},{"p":[697,936,697,1054]}],"fills":[{"p":[0,437,112,24],"styleRef":"s4"},{"p":[112,437,80,24],"styleRef":"s4"},{"p":[192,437,78,24],"styleRef":"s4"},{"p":[270,437,41,24],"styleRef":"s4"},{"p":[311,437,61,24],"styleRef":"s4"},{"p":[372,437,44,24],"styleRef":"s4"},{"p":[416,437,87,24],"styleRef":"s4"},{"p":[503,437,87,24],"styleRef":"s4"},{"p":[590,437,87,24],"styleRef":"s4"},{"p":[677,437,20,24],"styleRef":"s4"},{"p":[503,821,87,24],"styleRef":"s4"},{"p":[503,845,87,24],"styleRef":"s4"},{"p":[503,869,87,24],"styleRef":"s4"}],"strs":[{"p":[0,0,697,58],"id":"A1","text":"御　見　積　書","align":"cc","styleRef":"s1"},{"p":[503,82,194,32],"id":"H3","text":"2014年7月17日","align":"rc","styleRef":"s2","formula":true},{"p":[416,114,281,24],"id":"G4","text":"〒150-0013","align":"lc","styleRef":"s2"},{"p":[416,138,281,24],"id":"G5","text":"東京都 渋谷区 恵比寿 1-19-15 7F","align":"lcg","styleRef":"s2"},{"p":[0,162,270,24],"id":"A6","text":"ABC株式会社","align":"lcg","styleRef":"s2"},{"p":[270,162,146,24],"id":"D6","text":"御中","align":"lcg","styleRef":"s2"},{"p":[416,162,281,24],"id":"G6","text":"株式会社フレクト","align":"lcg","styleRef":"s2"},{"p":[0,210,311,24],"id":"A8","text":"下記の通り御見積申し上げます。","align":"lcg","styleRef":"s2"},{"p":[416,210,281,24],"id":"G8","text":"TEL： 03-5793-5640","align":"lcg","styleRef":"s2"},{"p":[416,234,281,24],"id":"G9","text":"FAX ：03-5793-5641","align":"lcg","styleRef":"s2"},{"p":[0,258,112,24],"id":"A10","text":"納入期日","align":"lcg","styleRef":"s2"},{"p":[112,258,199,24],"id":"B10","text":"2014年8月16日","align":"rcg","styleRef":"s2","formula":true},{"p":[0,282,112,24],"id":"A11","text":"納入場所","align":"lcg","styleRef":"s2"},{"p":[112,282,199,24],"id":"B11","text":"株式会社フレクト","align":"rc","styleRef":"s2"},{"p":[416,282,174,24],"id":"G11","text":"担当： 黒川 幸治","align":"lcg","styleRef":"s2"},{"p":[0,306,769,24],"id":"A12","text":"支払条件","align":"lcg","styleRef":"s2"},{"p":[0,330,112,24],"id":"A13","text":"有効期限","align":"lcg","styleRef":"s2"},{"p":[112,330,199,24],"id":"B13","text":"2014年7月24日","align":"rcg","styleRef":"s2","formula":true},{"p":[0,385,112,24],"id":"A15","text":"合計金額","align":"lcg","styleRef":"s3"},{"p":[112,385,199,24],"id":"B15","text":"¥9,187","align":"rcg","styleRef":"s3","formula":true},{"p":[0,437,112,24],"id":"A17","text":"(商品番号等）","align":"cc","styleRef":"s2"},{"p":[112,437,304,24],"id":"B17","text":"品名","align":"cc","styleRef":"s2"},{"p":[416,437,87,24],"id":"G17","text":"数量","align":"cc","styleRef":"s2"},{"p":[503,437,87,24],"id":"H17","text":"単価","align":"cc","styleRef":"s2"},{"p":[590,437,107,24],"id":"I17","text":"金額","align":"cc","styleRef":"s2"},{"p":[0,461,112,24],"id":"A18","text":"aaa","align":"lcg","styleRef":"s2"},{"p":[112,461,304,24],"id":"B18","text":"AAA","align":"lcg","styleRef":"s2"},{"p":[416,461,87,24],"id":"G18","text":"1","align":"rcg","styleRef":"s2"},{"p":[503,461,87,24],"id":"H18","text":"2,000","align":"rcg","styleRef":"s2"},{"p":[590,461,107,24],"id":"I18","text":"2,000","align":"rcg","styleRef":"s2","formula":true},{"p":[0,485,112,24],"id":"A19","text":"bbb","align":"lcg","styleRef":"s2"},{"p":[112,485,304,24],"id":"B19","text":"BBB","align":"lcg","styleRef":"s2"},{"p":[416,485,87,24],"id":"G19","text":"2","align":"rcg","styleRef":"s2"},{"p":[503,485,87,24],"id":"H19","text":"500","align":"rcg","styleRef":"s2"},{"p":[590,485,107,24],"id":"I19","text":"1,000","align":"rcg","styleRef":"s2","formula":true},{"p":[0,509,112,24],"id":"A20","text":"ccc","align":"lcg","styleRef":"s2"},{"p":[112,509,304,24],"id":"B20","text":"CCC","align":"lcg","styleRef":"s2"},{"p":[416,509,87,24],"id":"G20","text":"5","align":"rcg","styleRef":"s2"},{"p":[503,509,87,24],"id":"H20","text":"300","align":"rcg","styleRef":"s2"},{"p":[590,509,107,24],"id":"I20","text":"1,500","align":"rcg","styleRef":"s2","formula":true},{"p":[0,533,112,24],"id":"A21","text":"ddd","align":"lcg","styleRef":"s2"},{"p":[112,533,304,24],"id":"B21","text":"DDD","align":"lcg","styleRef":"s2"},{"p":[416,533,87,24],"id":"G21","text":"10","align":"rcg","styleRef":"s2"},{"p":[503,533,87,24],"id":"H21","text":"200","align":"rcg","styleRef":"s2"},{"p":[590,533,107,24],"id":"I21","text":"2,000","align":"rcg","styleRef":"s2","formula":true},{"p":[0,557,112,24],"id":"A22","text":"eee","align":"lcg","styleRef":"s2"},{"p":[112,557,304,24],"id":"B22","text":"EEE","align":"lcg","styleRef":"s2"},{"p":[416,557,87,24],"id":"G22","text":"15","align":"rcg","styleRef":"s2"},{"p":[503,557,87,24],"id":"H22","text":"150","align":"rcg","styleRef":"s2"},{"p":[590,557,107,24],"id":"I22","text":"2,250","align":"rcg","styleRef":"s2","formula":true},{"p":[590,581,107,24],"id":"I23","text":"0","align":"rcg","styleRef":"s2","formula":true},{"p":[590,605,107,24],"id":"I24","text":"0","align":"rcg","styleRef":"s2","formula":true},{"p":[590,629,107,24],"id":"I25","text":"0","align":"rcg","styleRef":"s2","formula":true},{"p":[590,653,107,24],"id":"I26","text":"0","align":"rcg","styleRef":"s2","formula":true},{"p":[590,677,107,24],"id":"I27","text":"0","align":"rcg","styleRef":"s2","formula":true},{"p":[590,701,107,24],"id":"I28","text":"0","align":"rcg","styleRef":"s2","formula":true},{"p":[590,725,107,24],"id":"I29","text":"0","align":"rcg","styleRef":"s2","formula":true},{"p":[590,749,107,24],"id":"I30","text":"0","align":"rcg","styleRef":"s2","formula":true},{"p":[590,773,107,24],"id":"I31","text":"0","align":"rcg","styleRef":"s2","formula":true},{"p":[590,797,107,24],"id":"I32","text":"0","align":"rcg","styleRef":"s2","formula":true},{"p":[503,821,87,24],"id":"H33","text":"小計","align":"lcg","styleRef":"s2"},{"p":[590,821,107,24],"id":"I33","text":"8,750","align":"rcg","styleRef":"s2","formula":true},{"p":[503,845,87,24],"id":"H34","text":"消費税","align":"lcg","styleRef":"s2"},{"p":[590,845,107,24],"id":"I34","text":"437","align":"rcg","styleRef":"s2","formula":true},{"p":[503,869,87,24],"id":"H35","text":"合計","align":"lcg","styleRef":"s2"},{"p":[590,869,107,24],"id":"I35","text":"9,187","align":"rcg","styleRef":"s2","formula":true},{"p":[0,936,697,20],"id":"A38","text":"備考","align":"lcg","styleRef":"s2"},{"p":[0,956,697,20],"id":"A39","text":"テストです。","align":"lcg","styleRef":"s2"}],"pictures":[{"p":[42,38,130,14],"uri":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIIAAAAOCAYAAAGUdvTIAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ\r\nbWFnZVJlYWR5ccllPAAADTppVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp\r\nbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+Cjx4OnhtcG1ldGEgeG1sbnM6\r\neD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDQuMi4yLWMwNjMgNTMu\r\nMzUyNjI0LCAyMDA4LzA3LzMwLTE4OjA1OjQxICAgICAgICAiPgogPHJkZjpSREYgeG1sbnM6cmRm\r\nPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRl\r\nc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9l\r\nbGVtZW50cy8xLjEvIgogICAgeG1sbnM6eG1wUmlnaHRzPSJodHRwOi8vbnMuYWRvYmUuY29tL3hh\r\ncC8xLjAvcmlnaHRzLyIKICAgIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9w\r\naG90b3Nob3AvMS4wLyIKICAgIHhtbG5zOklwdGM0eG1wQ29yZT0iaHR0cDovL2lwdGMub3JnL3N0\r\nZC9JcHRjNHhtcENvcmUvMS4wL3htbG5zLyIKICAgeG1wUmlnaHRzOldlYlN0YXRlbWVudD0iIgog\r\nICBwaG90b3Nob3A6QXV0aG9yc1Bvc2l0aW9uPSIiPgogICA8ZGM6cmlnaHRzPgogICAgPHJkZjpB\r\nbHQ+CiAgICAgPHJkZjpsaSB4bWw6bGFuZz0ieC1kZWZhdWx0Ii8+CiAgICA8L3JkZjpBbHQ+CiAg\r\nIDwvZGM6cmlnaHRzPgogICA8ZGM6Y3JlYXRvcj4KICAgIDxyZGY6U2VxPgogICAgIDxyZGY6bGkv\r\nPgogICAgPC9yZGY6U2VxPgogICA8L2RjOmNyZWF0b3I+CiAgIDxkYzp0aXRsZT4KICAgIDxyZGY6\r\nQWx0PgogICAgIDxyZGY6bGkgeG1sOmxhbmc9IngtZGVmYXVsdCI+RkxFQ1Tjg63jgrPjgpk8L3Jk\r\nZjpsaT4KICAgIDwvcmRmOkFsdD4KICAgPC9kYzp0aXRsZT4KICAgPHhtcFJpZ2h0czpVc2FnZVRl\r\ncm1zPgogICAgPHJkZjpBbHQ+CiAgICAgPHJkZjpsaSB4bWw6bGFuZz0ieC1kZWZhdWx0Ii8+CiAg\r\nICA8L3JkZjpBbHQ+CiAgIDwveG1wUmlnaHRzOlVzYWdlVGVybXM+CiAgIDxJcHRjNHhtcENvcmU6\r\nQ3JlYXRvckNvbnRhY3RJbmZvCiAgICBJcHRjNHhtcENvcmU6Q2lBZHJFeHRhZHI9IiIKICAgIElw\r\ndGM0eG1wQ29yZTpDaUFkckNpdHk9IiIKICAgIElwdGM0eG1wQ29yZTpDaUFkclJlZ2lvbj0iIgog\r\nICAgSXB0YzR4bXBDb3JlOkNpQWRyUGNvZGU9IiIKICAgIElwdGM0eG1wQ29yZTpDaUFkckN0cnk9\r\nIiIKICAgIElwdGM0eG1wQ29yZTpDaVRlbFdvcms9IiIKICAgIElwdGM0eG1wQ29yZTpDaUVtYWls\r\nV29yaz0iIgogICAgSXB0YzR4bXBDb3JlOkNpVXJsV29yaz0iIi8+CiAgPC9yZGY6RGVzY3JpcHRp\r\nb24+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgogICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAK\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAg\r\nICAgICAgICAgICAgICAgICAgICAgICAgCjw/eHBhY2tldCBlbmQ9InciPz5Uh/9QAAAEIElEQVR4\r\n2mKU0wi5wMDAIMsAAcJAzArEv6H8twwIIIzER2YzsEANWIWkmBnJECEgnoFmEDL7PxAzAgQQI9Al\r\nyLahK4TJqQDxHSTxbiAuhbniLxCvBZkGxOlohq2Eiv+EugjETgTi+UB8Coj3AQQQzAWngdiDAROA\r\nnMkJxD9wyDEyYAfocuh8WyA+BBNjgkYAFwNu8B1qCAzvRDMcGUvhkEMH7MgcgADCFhfI8fEWLW5g\r\nYCEQ++DQh828m0BshU2OBSmOsAEhHOIaQPwPiEVx6JEA4pdQ/iUgVkfzGDxqWKAC09AckclAGAgA\r\n8XTk0ATiDCzBDEq1bLgMAUUBoUSFoQeIzwOxAQ45bHpuIYUCSggABBAsDcCC+h0BXwtjcRyu3IIN\r\nnARiMyj7Cx6Pg4A8UpqB2QUqbH5hCSQeKPsRVB8IVMDKDCjgRooZFLtZiEx3tAA8BORZsIipQD1K\r\nDOiAYhhwAuK9UDYvLov2AbEzGZ6RQUtBoIL6D1qR9g9Nz2cgViBgLrZUKQVNHexo4vuBWA8tJRAN\r\nAAIIV5GIDWwD4lgoeym0MrkOxDYk2EesXS+AWBvKjgfiPiL1SUFrQlLsesmClAU+ocUgOviGxJaA\r\n6hMnMdBhdv2AphhcALmylETSh60cYYKWS7CU/ZOA3X/RyjAO5OzAT8fygJMMPV/Q8zKBGkQYh5oG\r\nIG5BD0VcTQ50fJSKgUDIrl84qj6c2RqKvxJhNws+gVlYCjBkcIaKgbAMmv1wgY8kmpcIpRfgSBVE\r\nh0o6GZ7hxVKt/kSLoS9Y9LUD8TM85mLL16zQuh7WyEa2Yx6UvYrI1ECwLiYGwBwhTkQpjC0ZXyag\r\n5w+SHcxQmg1HgCKDX+T4GSDAQFXkZyIaLqSCoziqzkPQvhMMPIR2AH4wUB/galZTAn5D2zfoqbgG\r\niJupbBeomaCKJeJnkJlr8YHvLFhSEKj888NT3RIDvuEJSHx8aoJfWBqpjkD8ikBFgy9Xf4fqx5Z7\r\n0Ys0b2i3mYmIihKU8zcDsRaa+7GV8TlAXIXHPC8gXowmNg1aDDPh8NdPbMWiHBAnQCOTnAADFWNX\r\n0AY9BgMA9TbcgfgpWoAwQktEZgKVK0jPc2j985eIYv02ED8hwX2g+k0X2khhgnZIvuMwG19fH1ud\r\n+5qQW7AlBDEgbqMw0E8OwoQAql9bqWDOQQINHHJB70AGDraiYjdSO5xcbEGk/f+IbNxQA7yF+pdS\r\nvxGTCP6T4a+LaH2nV9DWMV0AC46inV5ADdpP+kWggfYDRzUFitgVDKjDiLiAMLS/RknCew5tBH8g\r\noI4H2j74AI1UFgIjB4xYRjHe0rgNhZEQXmFprdIKPGMgPJaNrZvGSqAPiw2A5qlUqOx+VhwZ5QMO\r\nfxHbG/uPJXG9JDCogQt8hbYJmNESFV4AAFY2+XrAwgUlAAAAAElFTkSuQmCC\r\n"}],"charts":[],"styles":{"s2":"text-wrap:none;font-size:11pt;font-family:ipaexg;ＭＳ Ｐゴシック,Hiragino Kaku Gothic Pro,sans-serif;","s1":"text-wrap:none;font-size:22pt;font-family:ipaexg;ＭＳ Ｐゴシック,Hiragino Kaku Gothic Pro,sans-serif;","s3":"text-wrap:none;font-size:12pt;font-family:ipaexg;ＭＳ Ｐゴシック,Hiragino Kaku Gothic Pro,sans-serif;font-weight:bold;","s4":"|#CCFFCC|"}};
+	$("#canvasHolder").excelToCanvas(data);
+
+});
+</script>
+<div id="canvasHolder">
+	<canvas id="excelCanvas"></canvas>
+</div>
 </body>
 </html>
+
