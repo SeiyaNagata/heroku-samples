@@ -68,7 +68,7 @@ public class PdfServlet extends HttpServlet {
 		option.margin_top = LengthUnit.inch(0.25);
 		option.margin_bottom = LengthUnit.inch(0.25);
 		option.footer = new HyPDFOption.Footer();
-		option.footer.center = "&copy; FLECT CO.,LTD. ALL RIGHTS RESERVED 2014";
+		option.footer.center = "\u00A9 FLECT CO.,LTD. ALL RIGHTS RESERVED 2014";
 		return hypdf.htmlToPdf(content, option);
 	}
 
