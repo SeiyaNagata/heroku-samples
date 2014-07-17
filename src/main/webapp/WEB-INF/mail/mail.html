@@ -45,13 +45,12 @@
 	Addonを追加すると環境変数に**SENDGRID_USERNAME**, **SENDGRID_PASSWORD**という二つの変数が設定される
 </div>
 
-## ラッパーライブラリの利用
-メール送信はSendGridのWebAPIを[ラッパーライブラリ](https://github.com/shunjikonishi/sendgrid4j)を使用して叩いています。
-データベース(PostgreSQL)への接続情報は環境変数の**DATABASE_URL**から取得します。
+### ラッパーライブラリの利用
+メール送信はSendGridのWebAPIを[ラッパーライブラリ](http://oss.flect.co.jp/libs/ja/sendgrid4j.html)を使用して叩いています。
 
 環境変数の**SENDGRID_USERNAME**, **SENDGRID_PASSWORD**の認証情報を用いてSendGridに接続してAPIを実行します。
 
-## SPFとDKIMの設定
+### SPFとDKIMの設定
 メールではFromにどんなメールアドレスでも設定できることから簡単になりすましができます。  
 近年では[SPF](http://ja.wikipedia.org/wiki/Sender_Policy_Framework)や[DKIM](http://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E3%82%AD%E3%83%BC%E3%83%BB%E3%82%A2%E3%82%A4%E3%83%87%E3%83%B3%E3%83%86%E3%82%A3%E3%83%95%E3%82%A1%E3%82%A4%E3%83%89%E3%83%BB%E3%83%A1%E3%83%BC%E3%83%AB)を用いてメールの信頼性を検証するメールクライアントも増えてきています。  
 SendGridでもこれらの設定を行うことで信頼性を向上させることが可能ですので下記ドキュメントを参照して設定を行ってください。

@@ -35,7 +35,7 @@ PDFを生成するサンプルです。
 	Addonを追加すると環境変数に**HYPDF_USER**, **HYPDF_PASSWORD**という二つの変数が設定されます。
 </div>
 
-## 日本語フォントについて
+### 日本語フォントについて
 HyPDFで日本語を出力するためには日本語用のフォントをWebフォントとして組み込む必要があります。  
 [IPAフォント](http://ipafont.ipa.go.jp/)、[Source Han Sans](http://blog.typekit.com/alternate/source-han-sans-jp/)等のフォントを用意してHTML内のスタイルで@font-faceに指定してください。
 
@@ -49,10 +49,15 @@ body {
 }
 ```
 
-## ラッパーライブラリの利用
-このサンプルではHyPDFのWebAPIを[ラッパーライブラリ](https://github.com/shunjikonishi/hypdf4j)を使用して叩いています。
+### ラッパーライブラリの利用
+このサンプルではHyPDFのWebAPIを[ラッパーライブラリ](http://oss.flect.co.jp/libs/ja/hypdf4j.html)を使用して叩いています。
 
 環境変数の**HYPDF_USER**, **HYPDF_PASSWORD**の認証情報を用いてHyPDFに接続してAPIを実行します。
+
+### サンプルのHTMLについて
+PDF見積書のサンプルとして出力している[HTMLページ]({{url}})では[excel2canvas](http://oss.flect.co.jp/libs/ja/excel2canvas.html)というライブラリを使用してExcelをHTMLに変換しています。
+
+アップロードしたExcelファイルをHTML化する[デモサイト](http://hypdf-excel.herokuapp.com/)もあるのであわせてご覧ください。
 
 ### 関連ソース(ソースの閲覧には権限が必要です。)
 
