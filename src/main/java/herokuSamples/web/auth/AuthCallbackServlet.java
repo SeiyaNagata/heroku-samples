@@ -73,6 +73,7 @@ public class AuthCallbackServlet extends HttpServlet {
 
 			HttpEntity entity = response.getEntity();
 			String str = EntityUtils.toString(entity);
+System.out.println("str: " + str);
 			return new Gson().fromJson(str, AuthResponse.class);
 		} catch (URISyntaxException e) {
 			throw new IOException(e);
