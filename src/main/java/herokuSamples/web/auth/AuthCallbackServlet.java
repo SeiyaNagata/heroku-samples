@@ -50,7 +50,7 @@ public class AuthCallbackServlet extends HttpServlet {
 		String auth0clientId = System.getenv("AUTH0_CLIENT_ID");
 		String auth0domain   = System.getenv("AUTH0_DOMAIN");
 		String auth0secret   = System.getenv("AUTH0_CLIENT_SECRET");
-System.out.println("redirect_url: " + req.getRequestURL().toString());
+		String auth0callback = System.getenv("AUTH0_CALLBACK_URL");
 
 		// Parse request to fetch authorization code
 		String authorizationCode = req.getParameter("code");
@@ -64,7 +64,7 @@ System.out.println("redirect_url: " + req.getRequestURL().toString());
 			nameValuePairs.add(new BasicNameValuePair("client_id", auth0clientId));
 			nameValuePairs.add(new BasicNameValuePair("client_secret", auth0secret));
 
-			nameValuePairs.add(new BasicNameValuePair("redirect_uri", req.getRequestURL().toString()));
+			nameValuePairs.add(new BasicNameValuePair("redirect_uri", auth0callback));
 			nameValuePairs.add(new BasicNameValuePair("code", authorizationCode));
 
 			nameValuePairs.add(new BasicNameValuePair("grant_type", "authorization_code"));
