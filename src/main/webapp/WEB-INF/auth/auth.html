@@ -1,0 +1,52 @@
+<div id="markdown_content">
+<p>各種ソーシャルアカウントを用いてシングルサインオンするサンプルです。</p>
+
+<div class="sample">
+	<button id="btnLogin" class="btn">Login</button>
+	{{#user}}
+		<p>ログイン中のユーザー情報</p>
+		<ul>
+			<li>id: {{userId}}</li>
+			<li>name: {{name}}</li>
+			<li>mail: {{email}}</li>
+			<li>picture: <img src="{{pictureUrl}}" height="32" width="32"/></li>
+			<li>given_name: {{givenName}}</li>
+			<li>family_name: {{familyName}}</li>
+		</ul>
+	{{/user}}
+</div>
+
+## サンプルの説明
+
+各種ソーシャルアカウントを用いてアプリケーションにログインします。
+
+-----------------------------------------
+
+## 解説
+
+### 関連ソース(ソースの閲覧には権限が必要です。)
+
+- [AuthServlet.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/web/auth/AuthServlet.java)
+- [AuthCallbackServlet.java](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/java/herokuSamples/web/auth/AuthCallbackServlet.java)
+- [auth.html](https://github.com/FLECT-DEV-TEAM/heroku-samples/blob/master/src/main/webapp/WEB-INF/auth/auth.html)
+</div>
+<script src="https://cdn.auth0.com/w2/auth0-widget-5.0.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	var widget = new Auth0Widget({
+	  domain:         '{{auth0domain}}',
+	  clientID:       '{{auth0clientId}}',
+	  callbackURL:    '{{auth0callback}}',
+	  dict:           'ja'
+	});
+	$("#btnLogin").click(function() {
+		console.log("test");
+		widget.signin({
+			"scope" : "openid profile",
+			"state" : '{{state}}',
+			"icon" : '/img/logo_flect32.png',
+			"showIcon" : true
+		});
+	});
+});
+</script>
