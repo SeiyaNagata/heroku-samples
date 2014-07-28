@@ -3,6 +3,7 @@ package herokuSamples.web.auth;
 import java.util.Map;
 import java.util.List;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.lang.reflect.Type;
 import com.google.gson.reflect.TypeToken;
 
@@ -24,6 +25,8 @@ public class UserInfo {
 		Object ret = this.map.get(name);
 		return ret == null ? "" : ret.toString();
 	}
+
+	public Map<String, Object> getMap() { return this.map;}
 
 	public String getUserId() { return getValueAsString("user_id");}
 	public String getName() { return getValueAsString("name");}
@@ -54,5 +57,10 @@ public class UserInfo {
 		}
 		String ret = (String)identity.get("connection");
 		return ret == null ? "" : ret;
+	}
+
+	@Override
+	public String toString() {
+		return new GsonBuilder().setPrettyPrinting().create().toJson(this.map);
 	}
 }

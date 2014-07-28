@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.UUID;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.logging.Logger;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -17,12 +18,15 @@ import herokuSamples.util.TemplateEngine;
 @WebServlet(name="AuthServlet", urlPatterns={"/auth"})
 public class AuthServlet extends HttpServlet {
 
+	// ロガー
+	private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
 	private static Map<String, Object> initParams() {
 		String auth0clientId = System.getenv("AUTH0_CLIENT_ID");
 		String auth0domain   = System.getenv("AUTH0_DOMAIN");
 		String auth0callback = System.getenv("AUTH0_CALLBACK_URL");
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("title", "シングルサインオン サンプル");
+		params.put("title", "ソーシャルログイン サンプル");
 		params.put("auth0clientId", auth0clientId);
 		params.put("auth0domain", auth0domain);
 		params.put("auth0callback", auth0callback);
@@ -41,9 +45,12 @@ public class AuthServlet extends HttpServlet {
 
 		String userInfo = (String)req.getSession().getAttribute("auth0_user");
 		if (userInfo != null) {
-			params.put("user", UserInfo.fromJson(userInfo));
+			UserInfo user = UserInfo.fromJson(userInfo);
+			logger.info("Auth0 login: " + user.getName() + ", " + user.getEmail());
+			params.put("user", user);
 		}
 		TemplateEngine.merge(res, "auth/auth.html", params);
 	}
 
 }
+	

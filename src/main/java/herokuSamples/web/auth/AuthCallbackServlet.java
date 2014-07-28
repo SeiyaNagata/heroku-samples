@@ -35,7 +35,11 @@ public class AuthCallbackServlet extends HttpServlet {
 		String code = req.getParameter("code");
 		String state = req.getParameter("state");
 		String state2 = (String)req.getSession().getAttribute("state");
-		if (code == null || state == null || !state.equals(state2)) {
+		String error = req.getParameter("error");
+		if (error != null) {
+			res.setStatus(403);
+			res.getWriter().print("Forbidden: " + error);
+		} else if (code == null || state == null || !state.equals(state2)) {
 			res.setStatus(401);
 			res.getWriter().print("Bad Request");
 		} else {
@@ -74,7 +78,6 @@ public class AuthCallbackServlet extends HttpServlet {
 
 			HttpEntity entity = response.getEntity();
 			String str = EntityUtils.toString(entity);
-System.out.println("str: " + str);
 			return new Gson().fromJson(str, AuthResponse.class);
 		} catch (URISyntaxException e) {
 			throw new IOException(e);
