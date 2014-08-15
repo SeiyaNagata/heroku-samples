@@ -79,7 +79,8 @@ buf.append(mail.getHtmlBody());
 
 		public ReceivedMail(List<FileItem> items) {
 			this.items = items;
-System.out.println(keys());
+System.out.println("Keys: " + keys());
+System.out.println("Charset: " + getValue("charsets"));
 		}
 
 		public String getValue(String name) {
