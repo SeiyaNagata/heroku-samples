@@ -82,6 +82,7 @@ buf.append(mail.getHtmlBody());
 	private static class ReceivedMail {
 		private List<FileItem> items;
 		private Map<String, String> charsets = null;
+		private Map<String, AttachmentInfo> attachmentInfo = null;
 
 		public ReceivedMail(List<FileItem> items) {
 			this.items = items;
@@ -105,6 +106,19 @@ System.out.println("Attachment-Info: " + getValue("attachment-info"));
 				}
 			}
 			return this.charsets.get(name);
+		}
+
+		public AttachmentInfo getAttachmentInfo(int n) {
+			if (this.attachmentInfo == null) {
+				String json = getValue("attachment-info");
+				if (json == null) {
+					this.attachmentInfo = new HashMap<String, AttachmentInfo>();
+				} else {
+					Type type = new TypeToken<Map<String, AttachmentInfo>>() {}.getType();
+					this.attachmentInfo = new Gson().fromJson(json, type);
+				}
+			}
+			return this.attachmentInfo.get("attachment" + (n + 1));
 		}
 
 		public String getValue(String name) {
@@ -157,9 +171,19 @@ System.out.println("Attachment-Info: " + getValue("attachment-info"));
 		}
 
 		public String getAttachmentName(int n) {
-			FileItem item = getFileItem("attachment" + (n + 1));
-			return item != null && !item.isFormField() ? item.getName() : null;
+			AttachmentInfo info = getAttachmentInfo(n);
+			return info != null ? info.getName() : null;
 		}
 
+	}
+
+	public static class AttachmentInfo {
+		private String filename;
+		private String name;
+		private String type;
+
+		public String getFilename() { return this.filename;}
+		public String getName() { return this.name;}
+		public String getType() { return this.type;}
 	}
 }
