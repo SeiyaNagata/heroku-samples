@@ -22,6 +22,11 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.lang.reflect.Type;
+import com.google.gson.reflect.TypeToken;
+
 @WebServlet(name="InboundMailServlet", urlPatterns={"/inboundMail"})
 public class InboundMailServlet extends HttpServlet {
 
@@ -76,6 +81,7 @@ buf.append(mail.getHtmlBody());
 
 	private static class ReceivedMail {
 		private List<FileItem> items;
+		private Map<String, String> charsets = null;
 
 		public ReceivedMail(List<FileItem> items) {
 			this.items = items;
@@ -83,11 +89,29 @@ System.out.println("Keys: " + keys());
 System.out.println("Charset: " + getValue("charsets"));
 		}
 
+		public String getCharset(String name) {
+			if (this.charsets == null) {
+				FileItem item = getFileItem("charsets");
+				if (item == null) {
+					this.charsets = new HashMap<String, String>();
+				} else {
+					Type type = new TypeToken<Map<String, String>>() {}.getType();
+					try {
+						this.charsets = new Gson().fromJson(item.getString("utf-8"), type);
+					} catch (UnsupportedEncodingException e) {
+						throw new IllegalStateException(e);
+					}
+				}
+			}
+			return this.charsets.get(name);
+		}
+
 		public String getValue(String name) {
 			for (FileItem item : items) {
 				if (item.getFieldName().equals(name)) {
 					try {
-						return item.getString("utf-8");
+						String charset = getCharset(name);
+						return item.getString(charset == null ? "utf-8" : charset);
 					} catch (UnsupportedEncodingException e) {
 						throw new IllegalStateException(e);
 					}
