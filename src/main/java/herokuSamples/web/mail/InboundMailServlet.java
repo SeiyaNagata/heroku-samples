@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.net.URLDecoder;
 import java.io.UnsupportedEncodingException;
 import java.io.InputStream;
 import java.io.IOException;
@@ -157,7 +158,15 @@ System.out.println("Charset: " + getValue("charsets"));
 
 		public String getAttachmentName(int n) {
 			FileItem item = getFileItem("attachment" + (n + 1));
-			return item != null && !item.isFormField() ? item.getName() : null;
+			String ret = item != null && !item.isFormField() ? item.getName() : null;
+			if (ret != null) {
+				try {
+					ret = URLDecoder.decode(ret, "utf-8");
+				} catch (UnsupportedEncodingException e) {
+					throw new IllegalStateException(e);
+				}
+			}
+			return ret;
 		}
 
 	}
