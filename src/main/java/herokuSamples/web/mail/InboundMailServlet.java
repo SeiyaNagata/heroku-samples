@@ -70,8 +70,6 @@ public class InboundMailServlet extends HttpServlet {
 			}
 			String body = mail.getTextBody();
 			buf.append("\n").append(body);
-buf.append("\n---------------------------\n");
-buf.append(mail.getHtmlBody());
 			Cache.set("latestMail", buf.toString(), 7200);
 			System.out.println(buf.toString());
 		} catch (Exception e) {
@@ -86,9 +84,6 @@ buf.append(mail.getHtmlBody());
 
 		public ReceivedMail(List<FileItem> items) {
 			this.items = items;
-System.out.println("Keys: " + keys());
-System.out.println("Charset: " + getValue("charsets"));
-System.out.println("Attachment-Info: " + getValue("attachment-info"));
 		}
 
 		public String getCharset(String name) {
