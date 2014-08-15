@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
-import java.net.URLDecoder;
 import java.io.UnsupportedEncodingException;
 import java.io.InputStream;
 import java.io.IOException;
@@ -88,6 +87,7 @@ buf.append(mail.getHtmlBody());
 			this.items = items;
 System.out.println("Keys: " + keys());
 System.out.println("Charset: " + getValue("charsets"));
+System.out.println("Attachment-Info: " + getValue("attachment-info"));
 		}
 
 		public String getCharset(String name) {
@@ -158,15 +158,7 @@ System.out.println("Charset: " + getValue("charsets"));
 
 		public String getAttachmentName(int n) {
 			FileItem item = getFileItem("attachment" + (n + 1));
-			String ret = item != null && !item.isFormField() ? item.getName() : null;
-			if (ret != null) {
-				try {
-					ret = URLDecoder.decode(ret, "utf-8");
-				} catch (UnsupportedEncodingException e) {
-					throw new IllegalStateException(e);
-				}
-			}
-			return ret;
+			return item != null && !item.isFormField() ? item.getName() : null;
 		}
 
 	}
